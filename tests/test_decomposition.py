@@ -123,3 +123,54 @@ def test_multi_dimension_analysis_returns_one_entry_per_dimension():
                       ["channel", "device"])
     result = lens.analyze(SumMetric("revenue"))
     assert len(result.to_dict()["dimensions"]) == 2
+
+
+# ── cross-dimension interaction tests ────────────────────────────────────────
+
+def test_cross_dimension_returns_expected_keys():
+    """analyze_cross_dimensions result includes dim1, dim2, cross_label, top_interactions."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"),
+                      ["channel", "device"])
+    cross = lens.analyze_cross_dimensions(SumMetric("revenue"), "channel", "device")
+    for key in ("dim1", "dim2", "cross_label", "total_cells", "top_interactions", "all_interactions"):
+        assert key in cross
+
+
+def test_cross_dimension_cells_span_product():
+    """Number of interaction cells equals len(channels) × len(devices) in the data."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"),
+                      ["channel", "device"])
+    cross = lens.analyze_cross_dimensions(SumMetric("revenue"), "channel", "device")
+    # base_df has 2 channels (a, b) × 2 devices (mobile, desktop) = 4 cells
+    assert cross["total_cells"] == 4
+
+
+def test_cross_dimension_interaction_present_in_analyze_payload():
+    """analyze() auto-populates cross_dimension_interactions when ≥2 dimensions."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"),
+                      ["channel", "device"])
+    result = lens.analyze(SumMetric("revenue"))
+    cross = result.cross_dimension_interactions()
+    assert cross is not None
+    assert cross["dim1"] == "channel"
+    assert cross["dim2"] == "device"
+
+
+def test_cross_dimension_not_present_for_single_dimension():
+    """analyze() leaves cross_dimension_interactions None when only 1 dimension."""
+    df = pd.DataFrame([
+        {"date": "2026-01-01", "channel": "a", "revenue": 1000},
+        {"date": "2026-01-02", "channel": "a", "revenue": 1200},
+    ])
+    lens = MetricLens(df, "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"),
+                      ["channel"])
+    result = lens.analyze(SumMetric("revenue"))
+    assert result.cross_dimension_interactions() is None
+
+
+def test_cross_dimension_invalid_dim_raises():
+    """analyze_cross_dimensions raises ValueError for a missing dimension column."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"),
+                      ["channel", "device"])
+    with pytest.raises(ValueError):
+        lens.analyze_cross_dimensions(SumMetric("revenue"), "channel", "nonexistent_col")

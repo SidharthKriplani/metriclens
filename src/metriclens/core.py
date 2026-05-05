@@ -85,6 +85,16 @@ class MetricLens:
                 }
             )
 
+        # Cross-dimension interaction: auto-computed when ≥2 dimensions are present
+        cross_dimension_interactions: dict[str, Any] | None = None
+        if len(self.dimensions) >= 2:
+            try:
+                cross_dimension_interactions = self.analyze_cross_dimensions(
+                    metric, self.dimensions[0], self.dimensions[1]
+                )
+            except Exception:
+                cross_dimension_interactions = None
+
         payload = {
             "schema_version": "0.1",
             "metadata": {
@@ -108,10 +118,60 @@ class MetricLens:
             "quality_checks": [asdict(check) for check in quality_checks],
             "dimensions": dimensions_payload,
             "identity_checks": identity_residuals,
+            "cross_dimension_interactions": cross_dimension_interactions,
             "investigation_areas": _investigation_areas(dimensions_payload, metric.decomposition_type),
             "interpretation_note": MANDATORY_INTERPRETATION_NOTE,
         }
         return AnalysisResult(payload)
+
+    def analyze_cross_dimensions(
+        self,
+        metric: MetricSpec,
+        dim1: str,
+        dim2: str,
+    ) -> dict[str, Any]:
+        """Decompose metric delta across the Cartesian product of two dimensions.
+
+        Creates a synthetic cross-product column ('dim1 / dim2') and runs the
+        standard additive or ratio decomposition on it, revealing which specific
+        (channel, device) or similar cell pairs drove the headline metric move.
+        """
+        if dim1 not in self.data.columns or dim2 not in self.data.columns:
+            raise ValueError(
+                f"Both dimensions '{dim1}' and '{dim2}' must be present in the data."
+            )
+        cross_col = f"{dim1} / {dim2}"
+        working = normalize_dimension_nulls(self.data, [dim1, dim2]).copy()
+        working[cross_col] = working[dim1].astype(str) + " / " + working[dim2].astype(str)
+
+        baseline_df = self._slice_period(working, self.baseline_period)
+        current_df = self._slice_period(working, self.current_period)
+        baseline_total = metric.compute(baseline_df)
+        current_total = metric.compute(current_df)
+
+        if metric.decomposition_type == "additive":
+            rows = additive_decomposition(
+                metric, baseline_df, current_df, cross_col, baseline_total, current_total
+            )
+        else:
+            rows = ratio_decomposition(
+                metric, baseline_df, current_df, cross_col, baseline_total, current_total
+            )
+
+        # Annotate each row with the split dimension values for readability
+        for row in rows:
+            parts = str(row.get("segment", "")).split(" / ", 1)
+            row[dim1] = parts[0] if parts else None
+            row[dim2] = parts[1] if len(parts) == 2 else None
+
+        return {
+            "dim1": dim1,
+            "dim2": dim2,
+            "cross_label": cross_col,
+            "total_cells": len(rows),
+            "top_interactions": rows[:10],
+            "all_interactions": rows,
+        }
 
     def _slice_period(
         self, data: pd.DataFrame, period: tuple[pd.Timestamp, pd.Timestamp]

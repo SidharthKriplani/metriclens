@@ -55,6 +55,10 @@ class AnalysisResult:
             rows.extend(dimension["segment_contributions"])
         return pd.DataFrame(rows)
 
+    def cross_dimension_interactions(self) -> dict[str, Any] | None:
+        """Return the cross-dimension interaction payload if available (requires ≥2 dimensions)."""
+        return self.payload.get("cross_dimension_interactions")
+
     def mix_shift(self) -> pd.DataFrame:
         if self.payload["metadata"]["decomposition_type"] != "ratio":
             raise DecompositionTypeError("mix_shift() is only available for RatioMetric and AverageMetric results.")
