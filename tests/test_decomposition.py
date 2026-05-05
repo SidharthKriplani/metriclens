@@ -87,3 +87,39 @@ def test_mix_shift_raises_for_additive_metric():
     result = lens.analyze(SumMetric("revenue"))
     with pytest.raises(DecompositionTypeError):
         result.mix_shift()
+
+
+# ── edge case tests ───────────────────────────────────────────────────────────
+
+def test_negative_delta_direction_is_down():
+    """Revenue that decreases produces a DOWN direction summary."""
+    df = pd.DataFrame(
+        [
+            {"date": "2026-01-01", "channel": "a", "revenue": 1000},
+            {"date": "2026-01-02", "channel": "a", "revenue": 800},
+        ]
+    )
+    lens = MetricLens(df, "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"), ["channel"])
+    assert lens.analyze(SumMetric("revenue")).summary()["direction"] == "DOWN"
+
+
+def test_absolute_delta_sign_matches_direction():
+    """absolute_delta is negative when direction is DOWN."""
+    df = pd.DataFrame(
+        [
+            {"date": "2026-01-01", "channel": "a", "revenue": 500},
+            {"date": "2026-01-02", "channel": "a", "revenue": 300},
+        ]
+    )
+    lens = MetricLens(df, "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"), ["channel"])
+    summary = lens.analyze(SumMetric("revenue")).summary()
+    assert summary["absolute_delta"] == pytest.approx(-200.0)
+    assert summary["direction"] == "DOWN"
+
+
+def test_multi_dimension_analysis_returns_one_entry_per_dimension():
+    """Analyzing with two dimensions returns two entries in the dimensions list."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"),
+                      ["channel", "device"])
+    result = lens.analyze(SumMetric("revenue"))
+    assert len(result.to_dict()["dimensions"]) == 2
