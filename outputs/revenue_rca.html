@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MetricLens Report - revenue</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 32px; line-height: 1.45; color: #222; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0 28px; font-size: 13px; }
+    th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    code { background: #f5f5f5; padding: 2px 4px; border-radius: 4px; }
+    .note { background: #fff8dc; padding: 12px; border-left: 4px solid #d2a106; }
+  </style>
+</head>
+<body>
+<h1>MetricLens Report: revenue</h1>
+<h2>1. Executive Summary</h2>
+<ul>
+<li>Baseline value: <code>21830228.73</code></li>
+<li>Current value: <code>20592614.64</code></li>
+<li>Absolute delta: <code>-1237614.0899999999</code></li>
+<li>Relative delta pct: <code>-5.669267625671826</code></li>
+<li>Direction: <code>DOWN</code></li>
+</ul>
+<h2>2. Data Quality Summary</h2>
+<ul><li><strong>PASS</strong> <code>row_count_baseline</code> — baseline period contains 378 rows.</li><li><strong>PASS</strong> <code>row_count_current</code> — current period contains 378 rows.</li><li><strong>PASS</strong> <code>date_coverage_baseline</code> — baseline period missing 0 of 7 expected dates.</li><li><strong>PASS</strong> <code>date_coverage_current</code> — current period missing 0 of 7 expected dates.</li><li><strong>PASS</strong> <code>period_length_match</code> — baseline has 7 days; current has 7 days.</li><li><strong>PASS</strong> <code>null_rate_channel</code> — channel null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.</li><li><strong>PASS</strong> <code>null_rate_device</code> — device null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.</li><li><strong>PASS</strong> <code>null_rate_city</code> — city null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.</li><li><strong>PASS</strong> <code>null_rate_category</code> — category null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.</li><li><strong>PASS</strong> <code>duplicate_grain</code> — Found 0 duplicate rows at grain date x channel x device x city x category.</li></ul>
+<h2>3. Segment Contributions</h2>
+
+<h3>Dimension: channel</h3>
+<table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>dimension</th>
+      <th>segment</th>
+      <th>segment_status</th>
+      <th>baseline_value</th>
+      <th>current_value</th>
+      <th>segment_delta</th>
+      <th>contribution_pct</th>
+      <th>baseline_share</th>
+      <th>current_share</th>
+      <th>share_delta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>channel</td>
+      <td>paid_search</td>
+      <td>existing</td>
+      <td>10673785.95</td>
+      <td>10042553.85</td>
+      <td>-631232.10</td>
+      <td>51.003952</td>
+      <td>0.488945</td>
+      <td>0.487677</td>
+      <td>-0.001268</td>
+    </tr>
+    <tr>
+      <td>channel</td>
+      <td>organic</td>
+      <td>existing</td>
+      <td>7664488.72</td>
+      <td>7106940.70</td>
+      <td>-557548.02</td>
+      <td>45.050232</td>
+      <td>0.351095</td>
+      <td>0.345121</td>
+      <td>-0.005974</td>
+    </tr>
+    <tr>
+      <td>channel</td>
+      <td>email</td>
+      <td>existing</td>
+      <td>3491954.06</td>
+      <td>3443120.09</td>
+      <td>-48833.97</td>
+      <td>3.945816</td>
+      <td>0.159960</td>
+      <td>0.167202</td>
+      <td>0.007242</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Dimension: device</h3>
+<table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>dimension</th>
+      <th>segment</th>
+      <th>segment_status</th>
+      <th>baseline_value</th>
+      <th>current_value</th>
+      <th>segment_delta</th>
+      <th>contribution_pct</th>
+      <th>baseline_share</th>
+      <th>current_share</th>
+      <th>share_delta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>device</td>
+      <td>mobile</td>
+      <td>existing</td>
+      <td>13114492.61</td>
+      <td>12397251.65</td>
+      <td>-717240.96</td>
+      <td>57.953522</td>
+      <td>0.600749</td>
+      <td>0.602024</td>
+      <td>0.001275</td>
+    </tr>
+    <tr>
+      <td>device</td>
+      <td>desktop</td>
+      <td>existing</td>
+      <td>8715736.12</td>
+      <td>8195362.99</td>
+      <td>-520373.13</td>
+      <td>42.046478</td>
+      <td>0.399251</td>
+      <td>0.397976</td>
+      <td>-0.001275</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Dimension: city</h3>
+<table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>dimension</th>
+      <th>segment</th>
+      <th>segment_status</th>
+      <th>baseline_value</th>
+      <th>current_value</th>
+      <th>segment_delta</th>
+      <th>contribution_pct</th>
+      <th>baseline_share</th>
+      <th>current_share</th>
+      <th>share_delta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>city</td>
+      <td>Bengaluru</td>
+      <td>existing</td>
+      <td>8743491.88</td>
+      <td>8019854.55</td>
+      <td>-723637.33</td>
+      <td>58.470353</td>
+      <td>0.400522</td>
+      <td>0.389453</td>
+      <td>-0.011069</td>
+    </tr>
+    <tr>
+      <td>city</td>
+      <td>Delhi</td>
+      <td>existing</td>
+      <td>6186416.27</td>
+      <td>5737387.51</td>
+      <td>-449028.76</td>
+      <td>36.281807</td>
+      <td>0.283388</td>
+      <td>0.278614</td>
+      <td>-0.004774</td>
+    </tr>
+    <tr>
+      <td>city</td>
+      <td>Mumbai</td>
+      <td>existing</td>
+      <td>6900320.58</td>
+      <td>6835372.58</td>
+      <td>-64948.00</td>
+      <td>5.247839</td>
+      <td>0.316090</td>
+      <td>0.331933</td>
+      <td>0.015843</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Dimension: category</h3>
+<table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>dimension</th>
+      <th>segment</th>
+      <th>segment_status</th>
+      <th>baseline_value</th>
+      <th>current_value</th>
+      <th>segment_delta</th>
+      <th>contribution_pct</th>
+      <th>baseline_share</th>
+      <th>current_share</th>
+      <th>share_delta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>category</td>
+      <td>skincare</td>
+      <td>existing</td>
+      <td>10086393.13</td>
+      <td>9375631.87</td>
+      <td>-710761.26</td>
+      <td>57.429959</td>
+      <td>0.462038</td>
+      <td>0.455291</td>
+      <td>-0.006747</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td>baby</td>
+      <td>existing</td>
+      <td>7568747.84</td>
+      <td>7217366.17</td>
+      <td>-351381.67</td>
+      <td>28.391861</td>
+      <td>0.346710</td>
+      <td>0.350483</td>
+      <td>0.003774</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td>fitness</td>
+      <td>existing</td>
+      <td>4175087.76</td>
+      <td>3999616.60</td>
+      <td>-175471.16</td>
+      <td>14.178181</td>
+      <td>0.191253</td>
+      <td>0.194226</td>
+      <td>0.002973</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Mix / Rate / Cross Decomposition</h2>
+<p>Not applicable for additive metrics.</p>
+<h2>5. Investigation Areas</h2>
+<ul><li>Investigate channel=paid_search first; it has the largest absolute segment_delta signal (-631232.0999999996).</li><li>Investigate device=mobile first; it has the largest absolute segment_delta signal (-717240.959999999).</li><li>Investigate city=Bengaluru first; it has the largest absolute segment_delta signal (-723637.330000001).</li><li>Investigate category=skincare first; it has the largest absolute segment_delta signal (-710761.2600000016).</li></ul>
+<h2>6. Interpretation Note</h2>
+<p class="note">MetricLens reports deterministic metric movement decomposition. It identifies segment contributors, mix effects, rate effects, and cross terms. It does not claim causality, statistical significance, anomaly detection, or root cause proof. Use these outputs as investigation signals, not automatic decisions.</p>
+<h2>7. Schema</h2>
+<p>schema_version: <code>0.1</code></p>
+</body>
+</html>

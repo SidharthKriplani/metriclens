@@ -1,0 +1,400 @@
+{
+  "schema_version": "0.1",
+  "metadata": {
+    "metric_name": "revenue",
+    "metric_type": "SumMetric",
+    "display_unit": "value",
+    "decomposition_type": "additive",
+    "package_version": "0.1.0",
+    "date_col": "date",
+    "baseline_period": [
+      "2026-04-01",
+      "2026-04-07"
+    ],
+    "current_period": [
+      "2026-04-08",
+      "2026-04-14"
+    ],
+    "dimensions": [
+      "channel",
+      "device",
+      "city",
+      "category"
+    ]
+  },
+  "executive_summary": {
+    "baseline_value": 21830228.73,
+    "current_value": 20592614.64,
+    "absolute_delta": -1237614.0899999999,
+    "relative_delta_pct": -5.669267625671826,
+    "direction": "DOWN"
+  },
+  "quality_checks": [
+    {
+      "check": "row_count_baseline",
+      "status": "PASS",
+      "detail": "baseline period contains 378 rows.",
+      "value": 378
+    },
+    {
+      "check": "row_count_current",
+      "status": "PASS",
+      "detail": "current period contains 378 rows.",
+      "value": 378
+    },
+    {
+      "check": "date_coverage_baseline",
+      "status": "PASS",
+      "detail": "baseline period missing 0 of 7 expected dates.",
+      "value": 0.0
+    },
+    {
+      "check": "date_coverage_current",
+      "status": "PASS",
+      "detail": "current period missing 0 of 7 expected dates.",
+      "value": 0.0
+    },
+    {
+      "check": "period_length_match",
+      "status": "PASS",
+      "detail": "baseline has 7 days; current has 7 days.",
+      "value": "7:7"
+    },
+    {
+      "check": "null_rate_channel",
+      "status": "PASS",
+      "detail": "channel null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "null_rate_device",
+      "status": "PASS",
+      "detail": "device null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "null_rate_city",
+      "status": "PASS",
+      "detail": "city null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "null_rate_category",
+      "status": "PASS",
+      "detail": "category null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "duplicate_grain",
+      "status": "PASS",
+      "detail": "Found 0 duplicate rows at grain date x channel x device x city x category.",
+      "value": 0
+    }
+  ],
+  "dimensions": [
+    {
+      "dimension": "channel",
+      "segment_contributions": [
+        {
+          "dimension": "channel",
+          "segment": "paid_search",
+          "segment_status": "existing",
+          "baseline_value": 10673785.95,
+          "current_value": 10042553.85,
+          "segment_delta": -631232.0999999996,
+          "contribution_pct": 51.00395229016823,
+          "baseline_share": 0.4889452182116462,
+          "current_share": 0.4876774525995791,
+          "share_delta": -0.0012677656120670955
+        },
+        {
+          "dimension": "channel",
+          "segment": "organic",
+          "segment_status": "existing",
+          "baseline_value": 7664488.72,
+          "current_value": 7106940.7,
+          "segment_delta": -557548.0199999996,
+          "contribution_pct": 45.050232096177865,
+          "baseline_share": 0.35109520906975855,
+          "current_share": 0.3451208515403948,
+          "share_delta": -0.005974357529363761
+        },
+        {
+          "dimension": "channel",
+          "segment": "email",
+          "segment_status": "existing",
+          "baseline_value": 3491954.06,
+          "current_value": 3443120.09,
+          "segment_delta": -48833.970000000205,
+          "contribution_pct": 3.9458156136538665,
+          "baseline_share": 0.15995957271859515,
+          "current_share": 0.16720169586002603,
+          "share_delta": 0.007242123141430884
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "channel",
+          "segment": "paid_search",
+          "segment_status": "existing",
+          "baseline_value": 10673785.95,
+          "current_value": 10042553.85,
+          "segment_delta": -631232.0999999996,
+          "contribution_pct": 51.00395229016823,
+          "baseline_share": 0.4889452182116462,
+          "current_share": 0.4876774525995791,
+          "share_delta": -0.0012677656120670955
+        },
+        {
+          "dimension": "channel",
+          "segment": "organic",
+          "segment_status": "existing",
+          "baseline_value": 7664488.72,
+          "current_value": 7106940.7,
+          "segment_delta": -557548.0199999996,
+          "contribution_pct": 45.050232096177865,
+          "baseline_share": 0.35109520906975855,
+          "current_share": 0.3451208515403948,
+          "share_delta": -0.005974357529363761
+        },
+        {
+          "dimension": "channel",
+          "segment": "email",
+          "segment_status": "existing",
+          "baseline_value": 3491954.06,
+          "current_value": 3443120.09,
+          "segment_delta": -48833.970000000205,
+          "contribution_pct": 3.9458156136538665,
+          "baseline_share": 0.15995957271859515,
+          "current_share": 0.16720169586002603,
+          "share_delta": 0.007242123141430884
+        }
+      ],
+      "identity_residual": null
+    },
+    {
+      "dimension": "device",
+      "segment_contributions": [
+        {
+          "dimension": "device",
+          "segment": "mobile",
+          "segment_status": "existing",
+          "baseline_value": 13114492.61,
+          "current_value": 12397251.65,
+          "segment_delta": -717240.959999999,
+          "contribution_pct": 57.95352249100518,
+          "baseline_share": 0.6007492075416289,
+          "current_share": 0.6020241657860694,
+          "share_delta": 0.0012749582444405716
+        },
+        {
+          "dimension": "device",
+          "segment": "desktop",
+          "segment_status": "existing",
+          "baseline_value": 8715736.12,
+          "current_value": 8195362.99,
+          "segment_delta": -520373.12999999896,
+          "contribution_pct": 42.04647750899467,
+          "baseline_share": 0.39925079245837103,
+          "current_share": 0.39797583421393057,
+          "share_delta": -0.0012749582444404606
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "device",
+          "segment": "mobile",
+          "segment_status": "existing",
+          "baseline_value": 13114492.61,
+          "current_value": 12397251.65,
+          "segment_delta": -717240.959999999,
+          "contribution_pct": 57.95352249100518,
+          "baseline_share": 0.6007492075416289,
+          "current_share": 0.6020241657860694,
+          "share_delta": 0.0012749582444405716
+        },
+        {
+          "dimension": "device",
+          "segment": "desktop",
+          "segment_status": "existing",
+          "baseline_value": 8715736.12,
+          "current_value": 8195362.99,
+          "segment_delta": -520373.12999999896,
+          "contribution_pct": 42.04647750899467,
+          "baseline_share": 0.39925079245837103,
+          "current_share": 0.39797583421393057,
+          "share_delta": -0.0012749582444404606
+        }
+      ],
+      "identity_residual": null
+    },
+    {
+      "dimension": "city",
+      "segment_contributions": [
+        {
+          "dimension": "city",
+          "segment": "Bengaluru",
+          "segment_status": "existing",
+          "baseline_value": 8743491.88,
+          "current_value": 8019854.55,
+          "segment_delta": -723637.330000001,
+          "contribution_pct": 58.47035322618225,
+          "baseline_share": 0.40052222943428595,
+          "current_share": 0.38945295146842995,
+          "share_delta": -0.011069277965855995
+        },
+        {
+          "dimension": "city",
+          "segment": "Delhi",
+          "segment_status": "existing",
+          "baseline_value": 6186416.27,
+          "current_value": 5737387.51,
+          "segment_delta": -449028.7599999998,
+          "contribution_pct": 36.28180736048341,
+          "baseline_share": 0.2833876065392925,
+          "current_share": 0.278613843375452,
+          "share_delta": -0.004773763163840539
+        },
+        {
+          "dimension": "city",
+          "segment": "Mumbai",
+          "segment_status": "existing",
+          "baseline_value": 6900320.58,
+          "current_value": 6835372.58,
+          "segment_delta": -64948.0,
+          "contribution_pct": 5.247839413334411,
+          "baseline_share": 0.31609016402642154,
+          "current_share": 0.331933205156118,
+          "share_delta": 0.015843041129696478
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "city",
+          "segment": "Bengaluru",
+          "segment_status": "existing",
+          "baseline_value": 8743491.88,
+          "current_value": 8019854.55,
+          "segment_delta": -723637.330000001,
+          "contribution_pct": 58.47035322618225,
+          "baseline_share": 0.40052222943428595,
+          "current_share": 0.38945295146842995,
+          "share_delta": -0.011069277965855995
+        },
+        {
+          "dimension": "city",
+          "segment": "Delhi",
+          "segment_status": "existing",
+          "baseline_value": 6186416.27,
+          "current_value": 5737387.51,
+          "segment_delta": -449028.7599999998,
+          "contribution_pct": 36.28180736048341,
+          "baseline_share": 0.2833876065392925,
+          "current_share": 0.278613843375452,
+          "share_delta": -0.004773763163840539
+        },
+        {
+          "dimension": "city",
+          "segment": "Mumbai",
+          "segment_status": "existing",
+          "baseline_value": 6900320.58,
+          "current_value": 6835372.58,
+          "segment_delta": -64948.0,
+          "contribution_pct": 5.247839413334411,
+          "baseline_share": 0.31609016402642154,
+          "current_share": 0.331933205156118,
+          "share_delta": 0.015843041129696478
+        }
+      ],
+      "identity_residual": null
+    },
+    {
+      "dimension": "category",
+      "segment_contributions": [
+        {
+          "dimension": "category",
+          "segment": "skincare",
+          "segment_status": "existing",
+          "baseline_value": 10086393.13,
+          "current_value": 9375631.87,
+          "segment_delta": -710761.2600000016,
+          "contribution_pct": 57.42995863920729,
+          "baseline_share": 0.4620379041717902,
+          "current_share": 0.45529098824528863,
+          "share_delta": -0.006746915926501562
+        },
+        {
+          "dimension": "category",
+          "segment": "baby",
+          "segment_status": "existing",
+          "baseline_value": 7568747.84,
+          "current_value": 7217366.17,
+          "segment_delta": -351381.6699999999,
+          "contribution_pct": 28.391860826342075,
+          "baseline_share": 0.346709506969055,
+          "current_share": 0.35048323373082846,
+          "share_delta": 0.003773726761773455
+        },
+        {
+          "dimension": "category",
+          "segment": "fitness",
+          "segment_status": "existing",
+          "baseline_value": 4175087.76,
+          "current_value": 3999616.6,
+          "segment_delta": -175471.15999999968,
+          "contribution_pct": 14.178180534450743,
+          "baseline_share": 0.19125258885915483,
+          "current_share": 0.19422577802388283,
+          "share_delta": 0.002973189164727996
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "category",
+          "segment": "skincare",
+          "segment_status": "existing",
+          "baseline_value": 10086393.13,
+          "current_value": 9375631.87,
+          "segment_delta": -710761.2600000016,
+          "contribution_pct": 57.42995863920729,
+          "baseline_share": 0.4620379041717902,
+          "current_share": 0.45529098824528863,
+          "share_delta": -0.006746915926501562
+        },
+        {
+          "dimension": "category",
+          "segment": "baby",
+          "segment_status": "existing",
+          "baseline_value": 7568747.84,
+          "current_value": 7217366.17,
+          "segment_delta": -351381.6699999999,
+          "contribution_pct": 28.391860826342075,
+          "baseline_share": 0.346709506969055,
+          "current_share": 0.35048323373082846,
+          "share_delta": 0.003773726761773455
+        },
+        {
+          "dimension": "category",
+          "segment": "fitness",
+          "segment_status": "existing",
+          "baseline_value": 4175087.76,
+          "current_value": 3999616.6,
+          "segment_delta": -175471.15999999968,
+          "contribution_pct": 14.178180534450743,
+          "baseline_share": 0.19125258885915483,
+          "current_share": 0.19422577802388283,
+          "share_delta": 0.002973189164727996
+        }
+      ],
+      "identity_residual": null
+    }
+  ],
+  "identity_checks": [],
+  "investigation_areas": [
+    "Investigate channel=paid_search first; it has the largest absolute segment_delta signal (-631232.0999999996).",
+    "Investigate device=mobile first; it has the largest absolute segment_delta signal (-717240.959999999).",
+    "Investigate city=Bengaluru first; it has the largest absolute segment_delta signal (-723637.330000001).",
+    "Investigate category=skincare first; it has the largest absolute segment_delta signal (-710761.2600000016)."
+  ],
+  "interpretation_note": "MetricLens reports deterministic metric movement decomposition. It identifies segment contributors, mix effects, rate effects, and cross terms. It does not claim causality, statistical significance, anomaly detection, or root cause proof. Use these outputs as investigation signals, not automatic decisions."
+}

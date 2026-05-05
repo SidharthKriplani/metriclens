@@ -1,0 +1,593 @@
+{
+  "schema_version": "0.1",
+  "metadata": {
+    "metric_name": "cvr",
+    "metric_type": "RatioMetric",
+    "display_unit": "rate",
+    "decomposition_type": "ratio",
+    "package_version": "0.1.0",
+    "date_col": "date",
+    "baseline_period": [
+      "2026-04-01",
+      "2026-04-07"
+    ],
+    "current_period": [
+      "2026-04-08",
+      "2026-04-14"
+    ],
+    "dimensions": [
+      "channel",
+      "device",
+      "city",
+      "category"
+    ]
+  },
+  "executive_summary": {
+    "baseline_value": 0.07168976989773702,
+    "current_value": 0.06352213171686556,
+    "absolute_delta": -0.008167638180871462,
+    "relative_delta_pct": -11.393031659220437,
+    "direction": "DOWN"
+  },
+  "quality_checks": [
+    {
+      "check": "row_count_baseline",
+      "status": "PASS",
+      "detail": "baseline period contains 378 rows.",
+      "value": 378
+    },
+    {
+      "check": "row_count_current",
+      "status": "PASS",
+      "detail": "current period contains 378 rows.",
+      "value": 378
+    },
+    {
+      "check": "date_coverage_baseline",
+      "status": "PASS",
+      "detail": "baseline period missing 0 of 7 expected dates.",
+      "value": 0.0
+    },
+    {
+      "check": "date_coverage_current",
+      "status": "PASS",
+      "detail": "current period missing 0 of 7 expected dates.",
+      "value": 0.0
+    },
+    {
+      "check": "period_length_match",
+      "status": "PASS",
+      "detail": "baseline has 7 days; current has 7 days.",
+      "value": "7:7"
+    },
+    {
+      "check": "null_rate_channel",
+      "status": "PASS",
+      "detail": "channel null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "null_rate_device",
+      "status": "PASS",
+      "detail": "device null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "null_rate_city",
+      "status": "PASS",
+      "detail": "city null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "null_rate_category",
+      "status": "PASS",
+      "detail": "category null rate is 0.00%. Nulls are analyzed as '(null)' in the working copy.",
+      "value": 0.0
+    },
+    {
+      "check": "duplicate_grain",
+      "status": "PASS",
+      "detail": "Found 0 duplicate rows at grain date x channel x device x city x category.",
+      "value": 0
+    }
+  ],
+  "dimensions": [
+    {
+      "dimension": "channel",
+      "segment_contributions": [
+        {
+          "dimension": "channel",
+          "segment": "paid_search",
+          "segment_status": "existing",
+          "baseline_numerator": 8325,
+          "baseline_denominator": 114022,
+          "baseline_rate": 0.07301222571082773,
+          "baseline_weight": 0.48202682764947347,
+          "current_numerator": 7837,
+          "current_denominator": 135151,
+          "current_rate": 0.0579869923271008,
+          "current_weight": 0.5333672728420786,
+          "weight_delta": 0.051340445192605166,
+          "rate_delta": -0.015025233383726931,
+          "mix_effect": 0.003748480172496869,
+          "rate_effect": -0.007242565582650857,
+          "cross_term": -0.0007714021710433339,
+          "total_effect": -0.004265487581197321,
+          "contribution_pct": 52.22424753323496
+        },
+        {
+          "dimension": "channel",
+          "segment": "organic",
+          "segment_status": "existing",
+          "baseline_numerator": 5914,
+          "baseline_denominator": 87375,
+          "baseline_rate": 0.06768526466380544,
+          "baseline_weight": 0.3693769102968966,
+          "current_numerator": 5563,
+          "current_denominator": 83271,
+          "current_rate": 0.06680597086620792,
+          "current_weight": 0.32862521310854326,
+          "weight_delta": -0.040751697188353364,
+          "rate_delta": -0.000879293797597519,
+          "mix_effect": -0.0027582894096929533,
+          "rate_effect": -0.00032479082619979633,
+          "cross_term": 3.583271457929137e-05,
+          "total_effect": -0.003047247521313458,
+          "contribution_pct": 37.308796665969915
+        },
+        {
+          "dimension": "channel",
+          "segment": "email",
+          "segment_status": "existing",
+          "baseline_numerator": 2719,
+          "baseline_denominator": 35150,
+          "baseline_rate": 0.07735419630156472,
+          "baseline_weight": 0.14859626205362994,
+          "current_numerator": 2696,
+          "current_denominator": 34970,
+          "current_rate": 0.07709465255933658,
+          "current_weight": 0.13800751404937803,
+          "weight_delta": -0.010588748004251913,
+          "rate_delta": -0.00025954374222814103,
+          "mix_effect": -0.0008190840917087041,
+          "rate_effect": -3.8567229934512625e-05,
+          "cross_term": 2.7482432825343015e-06,
+          "total_effect": -0.0008549030783606824,
+          "contribution_pct": 10.46695580079512
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "channel",
+          "segment": "paid_search",
+          "segment_status": "existing",
+          "baseline_numerator": 8325,
+          "baseline_denominator": 114022,
+          "baseline_rate": 0.07301222571082773,
+          "baseline_weight": 0.48202682764947347,
+          "current_numerator": 7837,
+          "current_denominator": 135151,
+          "current_rate": 0.0579869923271008,
+          "current_weight": 0.5333672728420786,
+          "weight_delta": 0.051340445192605166,
+          "rate_delta": -0.015025233383726931,
+          "mix_effect": 0.003748480172496869,
+          "rate_effect": -0.007242565582650857,
+          "cross_term": -0.0007714021710433339,
+          "total_effect": -0.004265487581197321,
+          "contribution_pct": 52.22424753323496
+        },
+        {
+          "dimension": "channel",
+          "segment": "organic",
+          "segment_status": "existing",
+          "baseline_numerator": 5914,
+          "baseline_denominator": 87375,
+          "baseline_rate": 0.06768526466380544,
+          "baseline_weight": 0.3693769102968966,
+          "current_numerator": 5563,
+          "current_denominator": 83271,
+          "current_rate": 0.06680597086620792,
+          "current_weight": 0.32862521310854326,
+          "weight_delta": -0.040751697188353364,
+          "rate_delta": -0.000879293797597519,
+          "mix_effect": -0.0027582894096929533,
+          "rate_effect": -0.00032479082619979633,
+          "cross_term": 3.583271457929137e-05,
+          "total_effect": -0.003047247521313458,
+          "contribution_pct": 37.308796665969915
+        },
+        {
+          "dimension": "channel",
+          "segment": "email",
+          "segment_status": "existing",
+          "baseline_numerator": 2719,
+          "baseline_denominator": 35150,
+          "baseline_rate": 0.07735419630156472,
+          "baseline_weight": 0.14859626205362994,
+          "current_numerator": 2696,
+          "current_denominator": 34970,
+          "current_rate": 0.07709465255933658,
+          "current_weight": 0.13800751404937803,
+          "weight_delta": -0.010588748004251913,
+          "rate_delta": -0.00025954374222814103,
+          "mix_effect": -0.0008190840917087041,
+          "rate_effect": -3.8567229934512625e-05,
+          "cross_term": 2.7482432825343015e-06,
+          "total_effect": -0.0008549030783606824,
+          "contribution_pct": 10.46695580079512
+        }
+      ],
+      "identity_residual": 0.0
+    },
+    {
+      "dimension": "device",
+      "segment_contributions": [
+        {
+          "dimension": "device",
+          "segment": "mobile",
+          "segment_status": "existing",
+          "baseline_numerator": 10250,
+          "baseline_denominator": 144943,
+          "baseline_rate": 0.07071745444761043,
+          "baseline_weight": 0.6127450358702499,
+          "current_numerator": 9664,
+          "current_denominator": 166066,
+          "current_rate": 0.05819373020365397,
+          "current_weight": 0.6553719138725769,
+          "weight_delta": 0.04262687800232701,
+          "rate_delta": -0.012523724243956466,
+          "mix_effect": 0.0030144643033734072,
+          "rate_effect": -0.007673849861092223,
+          "cross_term": -0.0005338472654819173,
+          "total_effect": -0.005193232823200733,
+          "contribution_pct": 63.58304210099854
+        },
+        {
+          "dimension": "device",
+          "segment": "desktop",
+          "segment_status": "existing",
+          "baseline_numerator": 6708,
+          "baseline_denominator": 91604,
+          "baseline_rate": 0.07322824330815249,
+          "baseline_weight": 0.38725496412975013,
+          "current_numerator": 6432,
+          "current_denominator": 87326,
+          "current_rate": 0.07365503973616105,
+          "current_weight": 0.3446280861274231,
+          "weight_delta": -0.04262687800232701,
+          "rate_delta": 0.0004267964280085662,
+          "mix_effect": -0.003121491393821335,
+          "rate_effect": 0.0001652790354191628,
+          "cross_term": -1.8192999268550092e-05,
+          "total_effect": -0.0029744053576707223,
+          "contribution_pct": 36.41695789900138
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "device",
+          "segment": "mobile",
+          "segment_status": "existing",
+          "baseline_numerator": 10250,
+          "baseline_denominator": 144943,
+          "baseline_rate": 0.07071745444761043,
+          "baseline_weight": 0.6127450358702499,
+          "current_numerator": 9664,
+          "current_denominator": 166066,
+          "current_rate": 0.05819373020365397,
+          "current_weight": 0.6553719138725769,
+          "weight_delta": 0.04262687800232701,
+          "rate_delta": -0.012523724243956466,
+          "mix_effect": 0.0030144643033734072,
+          "rate_effect": -0.007673849861092223,
+          "cross_term": -0.0005338472654819173,
+          "total_effect": -0.005193232823200733,
+          "contribution_pct": 63.58304210099854
+        },
+        {
+          "dimension": "device",
+          "segment": "desktop",
+          "segment_status": "existing",
+          "baseline_numerator": 6708,
+          "baseline_denominator": 91604,
+          "baseline_rate": 0.07322824330815249,
+          "baseline_weight": 0.38725496412975013,
+          "current_numerator": 6432,
+          "current_denominator": 87326,
+          "current_rate": 0.07365503973616105,
+          "current_weight": 0.3446280861274231,
+          "weight_delta": -0.04262687800232701,
+          "rate_delta": 0.0004267964280085662,
+          "mix_effect": -0.003121491393821335,
+          "rate_effect": 0.0001652790354191628,
+          "cross_term": -1.8192999268550092e-05,
+          "total_effect": -0.0029744053576707223,
+          "contribution_pct": 36.41695789900138
+        }
+      ],
+      "identity_residual": -6.938893903907228e-18
+    },
+    {
+      "dimension": "city",
+      "segment_contributions": [
+        {
+          "dimension": "city",
+          "segment": "Bengaluru",
+          "segment_status": "existing",
+          "baseline_numerator": 6775,
+          "baseline_denominator": 89605,
+          "baseline_rate": 0.07560961999888399,
+          "baseline_weight": 0.37880421227071154,
+          "current_numerator": 6272,
+          "current_denominator": 94910,
+          "current_rate": 0.06608365820250764,
+          "current_weight": 0.3745579970954095,
+          "weight_delta": -0.004246215175302048,
+          "rate_delta": -0.009525961796376353,
+          "mix_effect": -0.0003210547158380825,
+          "rate_effect": -0.003608474454397237,
+          "cross_term": 4.044928353912083e-05,
+          "total_effect": -0.0038890798866961984,
+          "contribution_pct": 47.61572195747346
+        },
+        {
+          "dimension": "city",
+          "segment": "Delhi",
+          "segment_status": "existing",
+          "baseline_numerator": 4833,
+          "baseline_denominator": 70397,
+          "baseline_rate": 0.06865349375683623,
+          "baseline_weight": 0.29760259060567246,
+          "current_numerator": 4495,
+          "current_denominator": 75071,
+          "current_rate": 0.05987665010456768,
+          "current_weight": 0.2962642861653091,
+          "weight_delta": -0.0013383044403633693,
+          "rate_delta": -0.008776843652268551,
+          "mix_effect": -9.187927554123278e-05,
+          "rate_effect": -0.0026120114082560726,
+          "cross_term": 1.1746088832206054e-05,
+          "total_effect": -0.0026921445949650994,
+          "contribution_pct": 32.96111477207791
+        },
+        {
+          "dimension": "city",
+          "segment": "Mumbai",
+          "segment_status": "existing",
+          "baseline_numerator": 5350,
+          "baseline_denominator": 76545,
+          "baseline_rate": 0.06989352668365013,
+          "baseline_weight": 0.323593197123616,
+          "current_numerator": 5329,
+          "current_denominator": 83411,
+          "current_rate": 0.06388845595904617,
+          "current_weight": 0.3291777167392814,
+          "weight_delta": 0.0055845196156654175,
+          "rate_delta": -0.006005070724603961,
+          "mix_effect": 0.00039032177077287847,
+          "rate_effect": -0.0019432000347280253,
+          "cross_term": -3.3535435255008965e-05,
+          "total_effect": -0.001586413699210156,
+          "contribution_pct": 19.423163270448526
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "city",
+          "segment": "Bengaluru",
+          "segment_status": "existing",
+          "baseline_numerator": 6775,
+          "baseline_denominator": 89605,
+          "baseline_rate": 0.07560961999888399,
+          "baseline_weight": 0.37880421227071154,
+          "current_numerator": 6272,
+          "current_denominator": 94910,
+          "current_rate": 0.06608365820250764,
+          "current_weight": 0.3745579970954095,
+          "weight_delta": -0.004246215175302048,
+          "rate_delta": -0.009525961796376353,
+          "mix_effect": -0.0003210547158380825,
+          "rate_effect": -0.003608474454397237,
+          "cross_term": 4.044928353912083e-05,
+          "total_effect": -0.0038890798866961984,
+          "contribution_pct": 47.61572195747346
+        },
+        {
+          "dimension": "city",
+          "segment": "Delhi",
+          "segment_status": "existing",
+          "baseline_numerator": 4833,
+          "baseline_denominator": 70397,
+          "baseline_rate": 0.06865349375683623,
+          "baseline_weight": 0.29760259060567246,
+          "current_numerator": 4495,
+          "current_denominator": 75071,
+          "current_rate": 0.05987665010456768,
+          "current_weight": 0.2962642861653091,
+          "weight_delta": -0.0013383044403633693,
+          "rate_delta": -0.008776843652268551,
+          "mix_effect": -9.187927554123278e-05,
+          "rate_effect": -0.0026120114082560726,
+          "cross_term": 1.1746088832206054e-05,
+          "total_effect": -0.0026921445949650994,
+          "contribution_pct": 32.96111477207791
+        },
+        {
+          "dimension": "city",
+          "segment": "Mumbai",
+          "segment_status": "existing",
+          "baseline_numerator": 5350,
+          "baseline_denominator": 76545,
+          "baseline_rate": 0.06989352668365013,
+          "baseline_weight": 0.323593197123616,
+          "current_numerator": 5329,
+          "current_denominator": 83411,
+          "current_rate": 0.06388845595904617,
+          "current_weight": 0.3291777167392814,
+          "weight_delta": 0.0055845196156654175,
+          "rate_delta": -0.006005070724603961,
+          "mix_effect": 0.00039032177077287847,
+          "rate_effect": -0.0019432000347280253,
+          "cross_term": -3.3535435255008965e-05,
+          "total_effect": -0.001586413699210156,
+          "contribution_pct": 19.423163270448526
+        }
+      ],
+      "identity_residual": -6.938893903907228e-18
+    },
+    {
+      "dimension": "category",
+      "segment_contributions": [
+        {
+          "dimension": "category",
+          "segment": "skincare",
+          "segment_status": "existing",
+          "baseline_numerator": 6853,
+          "baseline_denominator": 95236,
+          "baseline_rate": 0.07195808307782771,
+          "baseline_weight": 0.40260920662701283,
+          "current_numerator": 6478,
+          "current_denominator": 102294,
+          "current_rate": 0.06332727237179112,
+          "current_weight": 0.40369861716234134,
+          "weight_delta": 0.0010894105353285166,
+          "rate_delta": -0.008630810706036593,
+          "mix_effect": 7.839189380703015e-05,
+          "rate_effect": -0.003474843850905321,
+          "cross_term": -9.402496111582417e-06,
+          "total_effect": -0.003405854453209873,
+          "contribution_pct": 41.699379646693394
+        },
+        {
+          "dimension": "category",
+          "segment": "baby",
+          "segment_status": "existing",
+          "baseline_numerator": 5867,
+          "baseline_denominator": 76964,
+          "baseline_rate": 0.07623044540304558,
+          "baseline_weight": 0.32536451529717136,
+          "current_numerator": 5574,
+          "current_denominator": 82052,
+          "current_rate": 0.06793253059035734,
+          "current_weight": 0.32381448506661614,
+          "weight_delta": -0.0015500302305552216,
+          "rate_delta": -0.00829791481268824,
+          "mix_effect": -0.00011815949486340997,
+          "rate_effect": -0.0026998470310075277,
+          "cross_term": 1.286201881023874e-05,
+          "total_effect": -0.002805144507060699,
+          "contribution_pct": 34.3446225817192
+        },
+        {
+          "dimension": "category",
+          "segment": "fitness",
+          "segment_status": "existing",
+          "baseline_numerator": 4238,
+          "baseline_denominator": 64347,
+          "baseline_rate": 0.06586165633207454,
+          "baseline_weight": 0.2720262780758158,
+          "current_numerator": 4044,
+          "current_denominator": 69046,
+          "current_rate": 0.058569649219361,
+          "current_weight": 0.2724868977710425,
+          "weight_delta": 0.000460619695226705,
+          "rate_delta": -0.007292007112713536,
+          "mix_effect": 3.033717606680616e-05,
+          "rate_effect": -0.001983617554573839,
+          "cross_term": -3.358842093849074e-06,
+          "total_effect": -0.001956639220600882,
+          "contribution_pct": 23.955997771587317
+        }
+      ],
+      "top_segments": [
+        {
+          "dimension": "category",
+          "segment": "skincare",
+          "segment_status": "existing",
+          "baseline_numerator": 6853,
+          "baseline_denominator": 95236,
+          "baseline_rate": 0.07195808307782771,
+          "baseline_weight": 0.40260920662701283,
+          "current_numerator": 6478,
+          "current_denominator": 102294,
+          "current_rate": 0.06332727237179112,
+          "current_weight": 0.40369861716234134,
+          "weight_delta": 0.0010894105353285166,
+          "rate_delta": -0.008630810706036593,
+          "mix_effect": 7.839189380703015e-05,
+          "rate_effect": -0.003474843850905321,
+          "cross_term": -9.402496111582417e-06,
+          "total_effect": -0.003405854453209873,
+          "contribution_pct": 41.699379646693394
+        },
+        {
+          "dimension": "category",
+          "segment": "baby",
+          "segment_status": "existing",
+          "baseline_numerator": 5867,
+          "baseline_denominator": 76964,
+          "baseline_rate": 0.07623044540304558,
+          "baseline_weight": 0.32536451529717136,
+          "current_numerator": 5574,
+          "current_denominator": 82052,
+          "current_rate": 0.06793253059035734,
+          "current_weight": 0.32381448506661614,
+          "weight_delta": -0.0015500302305552216,
+          "rate_delta": -0.00829791481268824,
+          "mix_effect": -0.00011815949486340997,
+          "rate_effect": -0.0026998470310075277,
+          "cross_term": 1.286201881023874e-05,
+          "total_effect": -0.002805144507060699,
+          "contribution_pct": 34.3446225817192
+        },
+        {
+          "dimension": "category",
+          "segment": "fitness",
+          "segment_status": "existing",
+          "baseline_numerator": 4238,
+          "baseline_denominator": 64347,
+          "baseline_rate": 0.06586165633207454,
+          "baseline_weight": 0.2720262780758158,
+          "current_numerator": 4044,
+          "current_denominator": 69046,
+          "current_rate": 0.058569649219361,
+          "current_weight": 0.2724868977710425,
+          "weight_delta": 0.000460619695226705,
+          "rate_delta": -0.007292007112713536,
+          "mix_effect": 3.033717606680616e-05,
+          "rate_effect": -0.001983617554573839,
+          "cross_term": -3.358842093849074e-06,
+          "total_effect": -0.001956639220600882,
+          "contribution_pct": 23.955997771587317
+        }
+      ],
+      "identity_residual": -6.938893903907228e-18
+    }
+  ],
+  "identity_checks": [
+    {
+      "dimension": "channel",
+      "identity_residual": 0.0
+    },
+    {
+      "dimension": "device",
+      "identity_residual": -6.938893903907228e-18
+    },
+    {
+      "dimension": "city",
+      "identity_residual": -6.938893903907228e-18
+    },
+    {
+      "dimension": "category",
+      "identity_residual": -6.938893903907228e-18
+    }
+  ],
+  "investigation_areas": [
+    "Investigate channel=paid_search first; it has the largest absolute total_effect signal (-0.004265487581197321).",
+    "Investigate device=mobile first; it has the largest absolute total_effect signal (-0.005193232823200733).",
+    "Investigate city=Bengaluru first; it has the largest absolute total_effect signal (-0.0038890798866961984).",
+    "Investigate category=skincare first; it has the largest absolute total_effect signal (-0.003405854453209873)."
+  ],
+  "interpretation_note": "MetricLens reports deterministic metric movement decomposition. It identifies segment contributors, mix effects, rate effects, and cross terms. It does not claim causality, statistical significance, anomaly detection, or root cause proof. Use these outputs as investigation signals, not automatic decisions."
+}
