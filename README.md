@@ -310,3 +310,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Issues and PRs welcome.
 ## License
 
 MIT © Sidharth Kriplani
+
+---
+
+## How This Connects
+
+MetricLens provides the **"why did it move?"** layer for any of the decision platforms in this portfolio:
+
+- **PulseRank:** After an A/B test changes the ranking algorithm, MetricLens decomposes GMV movement into seller mix shift (more high-GMV sellers exposed) vs. rate shift (same sellers converting at higher rates) — separating the diversity reranking effect from pure algorithm quality.
+- **RiskFrame:** After a threshold policy change (v1.0 → v1.1), MetricLens quantifies how much of the approval rate change came from mix shift in the applicant pool vs. the threshold tightening itself.
+- **MetaSignal:** Provides the post-experiment decomposition layer. MetaSignal answers "did the experiment win?" MetricLens answers "where in the segment distribution did the win come from?"
+
+The library is intentionally standalone — no dependency on the other platforms. It can be dropped into any analytics pipeline that produces segment-level before/after DataFrames.
