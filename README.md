@@ -20,37 +20,24 @@ It is deterministic, DataFrame-native, dependency-light, and honest about what i
 ## How it works
 
 ```mermaid
-flowchart LR
-    DF["📊 pandas DataFrame\nDaily segment-level grain"] --> ML
+flowchart TD
+    DF["📊 pandas DataFrame\nDaily segment-level grain\ndate · dimensions · numerator · denominator"] --> MT
 
-    subgraph ML["MetricLens Engine  src/metriclens/"]
-        MT["Metric Type\nRatioMetric · SumMetric\nCountMetric · AverageMetric"]
-        VAL["Input Validation\nNull handling · zero-fill convention\nDisappeared + new segment detection"]
-        DEC["Decomposition\nmix_effect + rate_effect + cross_term\nSums exactly to total_delta · no residual"]
+    MT["Metric Type\nRatioMetric · SumMetric · CountMetric · AverageMetric"]
+    MT --> VAL["Input Validation\nNull fill · zero-fill for missing segments\nNew + disappeared segment detection"]
+    VAL --> DEC
+
+    subgraph DEC["Decomposition Engine"]
+        ME["mix_effect — segment grew or shrank in volume"]
+        RE["rate_effect — segment's own rate changed"]
+        CT["cross_term — interaction, always reported\nomitting it breaks the exact identity"]
     end
 
-    MT --> VAL --> DEC
-
-    DEC --> RANK["Segment Ranking\nBy absolute total_effect\nAuto-generated investigation priority order"]
-
-    RANK --> OUT
-
-    subgraph OUT["Output Formats"]
-        JSON["result.to_json()\nMachine-readable · LLM-naratable"]
-        MD["result.to_markdown()\nContribution table"]
-        HTML["result.to_html()\nSelf-contained report"]
-    end
-
-    subgraph NOTE["Interpretation Note — mandatory, cannot be suppressed"]
-        N1["Reports movement decomposition only"]
-        N2["Does NOT claim causality or statistical significance"]
-        N3["Outputs are investigation signals, not decisions"]
-    end
-
-    OUT --> NOTE
+    DEC --> SUM["Σ mix + rate + cross = total_delta\nExact · no residual"]
+    SUM --> RANK["Segment Ranking\nSorted by absolute total_effect\nAuto-generated investigation priority"]
+    RANK --> OUT["result.to_json() · to_markdown() · to_html()"]
+    OUT --> NOTE["⚠️ Interpretation Note — mandatory, cannot be suppressed\nDecomposition only · no causality · no significance\nInvestigation signals, not decisions"]
 ```
-
----
 
 ---
 
