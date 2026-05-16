@@ -17,6 +17,11 @@ It is deterministic, DataFrame-native, dependency-light, and honest about what i
 [![Output](https://img.shields.io/badge/Output-JSON%20%7C%20Markdown%20%7C%20HTML-ab47bc?style=flat-square)](src/)
 [![pip](https://img.shields.io/badge/pip_install-metriclens-3776AB?style=flat-square&logo=python&logoColor=white)](https://pypi.org/project/metriclens/)
 
+## Architecture
+![MetricLens Architecture](docs/assets/architecture.svg)
+
+---
+
 ## How it works
 
 ```mermaid
@@ -322,3 +327,7 @@ MetricLens provides the **"why did it move?"** layer for any of the decision pla
 - **MetaSignal:** Provides the post-experiment decomposition layer. MetaSignal answers "did the experiment win?" MetricLens answers "where in the segment distribution did the win come from?"
 
 The library is intentionally standalone — no dependency on the other platforms. It can be dropped into any analytics pipeline that produces segment-level before/after DataFrames.
+
+---
+
+Part of a broader ML/LLM engineering toolkit. See also: [LendFlow](https://github.com/SidharthKriplani/lendflow) · [AgentReliabilityLab](https://github.com/SidharthKriplani/agentreliabilitylab) · [NexusSupply](https://github.com/SidharthKriplani/nexussupply) · [DocIngestQA](https://github.com/SidharthKriplani/docingestqa) · [TrialCheck](https://github.com/SidharthKriplani/trialcheck)
