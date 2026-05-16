@@ -47,7 +47,7 @@ def test_json_valid_and_schema_version():
         RatioMetric("orders", "sessions", name="cvr")
     )
     payload = json.loads(result.to_json())
-    assert payload["schema_version"] == "0.1"
+    assert payload["schema_version"] == "1.0"
     assert "rate_delta" in payload["dimensions"][0]["segment_contributions"][0]
     forbidden = "rate_delta" + "_pp"
     assert forbidden not in result.to_json()

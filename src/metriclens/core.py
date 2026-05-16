@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
 from metriclens._version import __version__
@@ -36,7 +37,7 @@ class MetricLens:
         self._validate_columns()
         self.data[self.date_col] = pd.to_datetime(self.data[self.date_col]).dt.normalize()
 
-    def analyze(self, metric: MetricSpec) -> AnalysisResult:
+    def analyze(self, metric: MetricSpec, *, bootstrap_n: int = 0, bootstrap_seed: int = 42) -> AnalysisResult:
         working = normalize_dimension_nulls(self.data, self.dimensions)
         baseline_df = self._slice_period(working, self.baseline_period)
         current_df = self._slice_period(working, self.current_period)
@@ -95,8 +96,22 @@ class MetricLens:
             except Exception:
                 cross_dimension_interactions = None
 
+        # Bootstrap confidence intervals (optional)
+        bootstrap_cis: dict[str, Any] | None = None
+        if bootstrap_n > 0 and metric.decomposition_type == "ratio":
+            bootstrap_cis = _bootstrap_ratio_cis(
+                metric=metric,
+                working=working,
+                date_col=self.date_col,
+                baseline_period=self.baseline_period,
+                current_period=self.current_period,
+                dimensions=self.dimensions,
+                n_bootstrap=bootstrap_n,
+                seed=bootstrap_seed,
+            )
+
         payload = {
-            "schema_version": "0.1",
+            "schema_version": "1.0",
             "metadata": {
                 "metric_name": metric.display_name,
                 "metric_type": metric.__class__.__name__,
@@ -120,6 +135,7 @@ class MetricLens:
             "identity_checks": identity_residuals,
             "cross_dimension_interactions": cross_dimension_interactions,
             "investigation_areas": _investigation_areas(dimensions_payload, metric.decomposition_type),
+            "bootstrap_cis": bootstrap_cis,
             "interpretation_note": MANDATORY_INTERPRETATION_NOTE,
         }
         return AnalysisResult(payload)
@@ -190,6 +206,77 @@ def _parse_period(period: tuple[str, str]) -> tuple[pd.Timestamp, pd.Timestamp]:
     if start > end:
         raise ValueError("Period start must be on or before period end.")
     return start, end
+
+
+def _bootstrap_ratio_cis(
+    metric: MetricSpec,
+    working: pd.DataFrame,
+    date_col: str,
+    baseline_period: tuple[pd.Timestamp, pd.Timestamp],
+    current_period: tuple[pd.Timestamp, pd.Timestamp],
+    dimensions: list[str],
+    n_bootstrap: int,
+    seed: int,
+    ci_level: float = 0.95,
+) -> dict[str, Any]:
+    """Bootstrap date-resampled confidence intervals on segment decomposition effects.
+
+    Resamples baseline and current dates independently with replacement n_bootstrap times.
+    For each bootstrap sample, recomputes the ratio decomposition and collects per-segment
+    mix_effect, rate_effect, cross_term, mix_attributed, rate_attributed, total_effect.
+    Returns (1-ci_level)/2 and (1+ci_level)/2 percentile bounds per segment per dimension.
+    """
+    rng = np.random.default_rng(seed)
+    alpha = (1.0 - ci_level) / 2
+
+    baseline_df_full = working[(working[date_col] >= baseline_period[0]) & (working[date_col] <= baseline_period[1])].copy()
+    current_df_full = working[(working[date_col] >= current_period[0]) & (working[date_col] <= current_period[1])].copy()
+
+    baseline_dates = baseline_df_full[date_col].unique()
+    current_dates = current_df_full[date_col].unique()
+
+    ci_fields = ["mix_effect", "rate_effect", "cross_term", "mix_attributed", "rate_attributed", "total_effect"]
+    # Accumulate bootstrap draws: {dimension: {segment: {field: [values]}}}
+    accumulators: dict[str, dict[str, dict[str, list[float]]]] = {dim: {} for dim in dimensions}
+
+    for _ in range(n_bootstrap):
+        b_dates = rng.choice(baseline_dates, size=len(baseline_dates), replace=True)
+        c_dates = rng.choice(current_dates, size=len(current_dates), replace=True)
+        b_sample = baseline_df_full[baseline_df_full[date_col].isin(b_dates)]
+        c_sample = current_df_full[current_df_full[date_col].isin(c_dates)]
+        b_val = metric.compute(b_sample)
+        c_val = metric.compute(c_sample)
+        for dim in dimensions:
+            rows = ratio_decomposition(metric, b_sample, c_sample, dim, b_val, c_val)
+            for row in rows:
+                seg = str(row["segment"])
+                if seg not in accumulators[dim]:
+                    accumulators[dim][seg] = {f: [] for f in ci_fields}
+                for f in ci_fields:
+                    val = row.get(f)
+                    if val is not None:
+                        accumulators[dim][seg][f].append(float(val))
+
+    # Build CI output
+    result: dict[str, Any] = {
+        "n_bootstrap": n_bootstrap,
+        "ci_level": ci_level,
+        "method": "date_resample",
+        "dimensions": {},
+    }
+    for dim, segments in accumulators.items():
+        result["dimensions"][dim] = {}
+        for seg, fields in segments.items():
+            result["dimensions"][dim][seg] = {}
+            for f, vals in fields.items():
+                if len(vals) >= 2:
+                    arr = np.array(vals)
+                    result["dimensions"][dim][seg][f] = {
+                        "mean": float(np.mean(arr)),
+                        "lo": float(np.quantile(arr, alpha)),
+                        "hi": float(np.quantile(arr, 1 - alpha)),
+                    }
+    return result
 
 
 def _investigation_areas(dimensions_payload: list[dict[str, Any]], decomposition_type: str) -> list[str]:

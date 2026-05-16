@@ -187,6 +187,8 @@ def _markdown_table(rows: list[dict[str, Any]]) -> str:
         "rate_effect",
         "cross_term",
         "total_effect",
+        "mix_attributed",
+        "rate_attributed",
         "contribution_pct",
     ]
     columns = [c for c in preferred if c in rows[0]]

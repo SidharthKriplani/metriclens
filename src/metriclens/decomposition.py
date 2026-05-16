@@ -107,6 +107,13 @@ def ratio_decomposition(
     merged["rate_effect"] = merged["baseline_weight"] * merged["rate_delta"]
     merged["cross_term"] = merged["weight_delta"] * merged["rate_delta"]
     merged["total_effect"] = merged["mix_effect"] + merged["rate_effect"] + merged["cross_term"]
+    # Shapley-attributed values: distribute cross_term equally between mix and rate.
+    # This eliminates the implicit baseline-first ordering bias in the standard decomposition.
+    # Provably the Shapley value for the 2-effect cooperative game where cross_term is the
+    # interaction value: Shapley(mix) = mix_effect + cross/2, Shapley(rate) = rate_effect + cross/2.
+    # mix_attributed + rate_attributed = total_effect exactly.
+    merged["mix_attributed"] = merged["mix_effect"] + merged["cross_term"] / 2
+    merged["rate_attributed"] = merged["rate_effect"] + merged["cross_term"] / 2
 
     total_delta = current_value - baseline_value
     merged["contribution_pct"] = np.where(
@@ -142,6 +149,8 @@ def ratio_decomposition(
         "rate_effect",
         "cross_term",
         "total_effect",
+        "mix_attributed",
+        "rate_attributed",
         "contribution_pct",
     ]
     return _records(merged[cols])

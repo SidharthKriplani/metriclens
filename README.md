@@ -13,7 +13,7 @@ It is deterministic, DataFrame-native, dependency-light, and honest about what i
 
 [![Decomposition](https://img.shields.io/badge/Decomposition-Mix%20%2F%20Rate%20%2F%20Cross-4fc3f7?style=flat-square)](src/)
 [![Metric Types](https://img.shields.io/badge/Metrics-Ratio%20%7C%20Sum%20%7C%20Count%20%7C%20Average-42a5f5?style=flat-square)](src/)
-[![Tests](https://img.shields.io/badge/Tests-19%2F19_passing-66bb6a?style=flat-square)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-38%2F38_passing-66bb6a?style=flat-square)](tests/)
 [![Output](https://img.shields.io/badge/Output-JSON%20%7C%20Markdown%20%7C%20HTML-ab47bc?style=flat-square)](src/)
 [![pip](https://img.shields.io/badge/pip_install-metriclens-3776AB?style=flat-square&logo=python&logoColor=white)](https://pypi.org/project/metriclens/)
 
@@ -101,6 +101,11 @@ result.to_html("outputs/cvr_rca.html")
 # Revenue (additive)
 result = lens.analyze(SumMetric("revenue"))
 result.to_json("outputs/revenue_rca.json")
+
+# Bootstrap confidence intervals (200 date-resample iterations, 95% CI)
+result = lens.analyze(RatioMetric("orders", "sessions", name="cvr"), bootstrap_n=200)
+cis = result.to_dict()["bootstrap_cis"]
+# cis["dimensions"]["channel"]["paid_search"]["total_effect"] → {"mean": ..., "lo": ..., "hi": ...}
 ```
 
 ---
@@ -170,12 +175,23 @@ The movement between baseline and current decomposes exactly:
 
 ```
 w_c_s × r_c_s − w_b_s × r_b_s
-  = (w_c_s − w_b_s) × r_b_s          ← mix_effect   (segment grew/shrank in volume)
-  + w_b_s × (r_c_s − r_b_s)          ← rate_effect  (segment's own rate changed)
-  + (w_c_s − w_b_s) × (r_c_s − r_b_s) ← cross_term  (interaction)
+  = (w_c_s − w_b_s) × r_b_s            ← mix_effect   (segment grew/shrank in volume)
+  + w_b_s × (r_c_s − r_b_s)            ← rate_effect  (segment's own rate changed)
+  + (w_c_s − w_b_s) × (r_c_s − r_b_s) ← cross_term   (interaction)
 ```
 
 Summing `mix_effect + rate_effect + cross_term` across all segments equals `R_c − R_b` exactly (up to floating-point). The cross term is always reported — discarding it breaks the identity.
+
+### Shapley attribution
+
+The standard decomposition has an implicit "baseline-first" ordering bias: `rate_effect` uses baseline weights, which understates rate changes in growing segments. MetricLens distributes the cross term equally between mix and rate using the Shapley value for this two-effect cooperative game:
+
+```
+mix_attributed  = mix_effect  + cross_term / 2
+rate_attributed = rate_effect + cross_term / 2
+```
+
+Property: `mix_attributed + rate_attributed = total_effect` exactly. This eliminates the ordering dependency and produces attribution values that are symmetric — the split is the same whether you evaluate "mix first" or "rate first".
 
 ### Disappeared and new segments
 
@@ -235,11 +251,11 @@ Returns an `AnalysisResult` with:
 
 ---
 
-## Output schema (v0.1)
+## Output schema (v1.0)
 
 ```json
 {
-  "schema_version": "0.1",
+  "schema_version": "1.0",
   "metadata": { "metric_name": "cvr", "decomposition_type": "ratio", ... },
   "executive_summary": {
     "baseline_value": 0.0717,
@@ -260,6 +276,8 @@ Returns an `AnalysisResult` with:
           "rate_effect": -0.00724,
           "cross_term": -0.000771,
           "total_effect": -0.00427,
+          "mix_attributed": 0.00336,
+          "rate_attributed": -0.00763,
           "contribution_pct": 52.2
         }
       ]
@@ -292,7 +310,7 @@ Every `analyze()` call runs these checks automatically and includes results in t
 
 **Not anomaly detection.** MetricLens does not compute z-scores, flag outliers, or compare against expected distributions.
 
-**Not statistical significance testing.** There are no p-values, confidence intervals, or hypothesis tests. v1 will add bootstrap confidence intervals optionally.
+**Not statistical significance testing.** The decomposition is a deterministic algebraic identity. For uncertainty quantification, use `bootstrap_n` to get empirical confidence intervals on each segment effect via date resampling — these are empirical bounds, not p-values.
 
 **Not a BI dashboard.** MetricLens produces structured file outputs — JSON, Markdown, HTML. It does not run a server or render interactive charts.
 
@@ -307,9 +325,17 @@ Every `analyze()` call runs these checks automatically and includes results in t
 | Version | Scope |
 |---|---|
 | **v0.1.0** | Movement Mode: SumMetric, CountMetric, RatioMetric, AverageMetric, JSON/MD/HTML output ✅ |
-| v0.2 | CLI (`metriclens analyze`), additional demo datasets |
-| v1.0 | Shapley attribution across dimensions, bootstrap confidence intervals, optional LLM narrator |
+| **v1.0** | Shapley attribution (mix_attributed, rate_attributed) — eliminates baseline-first ordering bias ✅ |
+| **v1.0** | Bootstrap CI via date resampling (`bootstrap_n` param, 95% empirical CI per segment effect) ✅ |
+| **v1.0** | Cross-dimension interaction analysis (Cartesian product decomposition) ✅ |
+| v1.1 | CLI (`metriclens analyze`), additional demo datasets |
 | v2.0 | LiftMap Mode: segment opportunity ranking by benchmark-gap × volume |
+
+---
+
+## Resume-Safe Claim
+
+Built **MetricLens**, a DataFrame-native metric movement decomposition library that decomposes ratio and additive metric deltas into mix effects, rate effects, cross terms, and Shapley-attributed values (eliminating baseline-first ordering bias), with cross-dimension Cartesian product analysis, optional bootstrap confidence intervals via date resampling, 7 auto-run data quality checks, and structured JSON/Markdown/HTML output — pip-installable, 38 tests, PyPI-published.
 
 ---
 
@@ -345,12 +371,27 @@ The library is intentionally standalone — no dependency on the other platforms
 
 ## Part of Applied LLM Systems Portfolio
 
-This project is part of a portfolio targeting Applied LLM Systems Engineer roles.
+This project is part of a 13-repo portfolio targeting Applied LLM Systems Engineer, MLOps, and Technical AI PM roles.
 
-- [**NexusSupply**](https://github.com/SidharthKriplani/nexussupply) — Supplier Risk Intelligence Platform (LangGraph + FinBERT + XGBoost + Instructor + NetworkX)
-- [**LendFlow**](https://github.com/SidharthKriplani/lendflow) — AI-powered loan underwriting pipeline (LangGraph + RAG + FOIR rules engine)
-- [**AgentReliabilityLab**](https://github.com/SidharthKriplani/agentreliabilitylab) — Cyber threat triage agent (LangGraph + hybrid RAG + HITL + RAGAS eval)
-- [**RiskFrame Platform**](https://github.com/SidharthKriplani/riskframe_platform) — ML model lifecycle (XGBoost + LightGBM champion/challenger, Optuna HPO, drift monitoring)
-- [**DevPulse Platform**](https://github.com/SidharthKriplani/devpulse_platform) — Version-safe RAG migration intelligence (LLM-Last principle, conflict detection)
-- [**PulseRank Platform**](https://github.com/SidharthKriplani/pulserank_platform) — Marketplace ranking with IPS debiasing (position bias correction, delayed attribution)
-- [**MetaSignal Platform**](https://github.com/SidharthKriplani/metasignal_platform) — Experimentation intelligence (CUPED + guardrail-first + A/A calibration)
+**Applied Systems (LangGraph pipelines):**
+
+| Project | Domain | Primary Failure Mode |
+|---------|--------|----------------------|
+| [LendFlow](https://github.com/SidharthKriplani/lendflow) | Financial underwriting | When to stop or escalate |
+| [AgentReliabilityLab](https://github.com/SidharthKriplani/agentreliabilitylab) | Cyber threat triage | When to stop or escalate |
+| [NexusSupply](https://github.com/SidharthKriplani/nexussupply) | Supplier risk intelligence | Conflicting signal fusion |
+
+**Platforms & Auditors (domain-agnostic tooling):**
+
+| Project | What It Audits / Builds |
+|---------|------------------------|
+| [InferenceLens](https://github.com/SidharthKriplani/inferencelens) | Inference cost/quality tradeoffs — Pareto frontier, routing rules |
+| [RiskFrame](https://github.com/SidharthKriplani/riskframe_platform) | ML model lifecycle — champion/challenger, drift, fairness |
+| [MetaSignal](https://github.com/SidharthKriplani/metasignal_platform) | A/B experiment validity — CUPED, guardrail-first, SRM |
+| [DevPulse](https://github.com/SidharthKriplani/devpulse_platform) | Version-safe RAG — conflict detection, LLM-Last architecture |
+| [PulseRank](https://github.com/SidharthKriplani/pulserank_platform) | Marketplace ranking — IPS debiasing, MMR diversity |
+| [TrialCheck](https://github.com/SidharthKriplani/trialcheck_v0) | A/B readout audit — SRM, peeking, underpowered tests |
+| [FeatureLeakageLens](https://github.com/SidharthKriplani/featureleakagelens_v0) | Pre-training leakage — target, temporal, overlap |
+| [GoldenSetAuditor](https://github.com/SidharthKriplani/goldensetauditor_v0) | LLM/RAG eval dataset quality |
+| [DocIngestQA](https://github.com/SidharthKriplani/docingestqa) | RAG document ingestion quality — 11 deterministic checks |
+| **MetricLens** | Metric movement decomposition — mix shift vs rate shift |

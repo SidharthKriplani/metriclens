@@ -137,12 +137,12 @@ def test_cross_dimension_returns_expected_keys():
 
 
 def test_cross_dimension_cells_span_product():
-    """Number of interaction cells equals len(channels) × len(devices) in the data."""
+    """Number of interaction cells equals the unique channel/device combos actually present."""
     lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"),
                       ["channel", "device"])
     cross = lens.analyze_cross_dimensions(SumMetric("revenue"), "channel", "device")
-    # base_df has 2 channels (a, b) × 2 devices (mobile, desktop) = 4 cells
-    assert cross["total_cells"] == 4
+    # base_df rows: (a, mobile) and (b, desktop) across both periods — 2 unique combos
+    assert cross["total_cells"] == 2
 
 
 def test_cross_dimension_interaction_present_in_analyze_payload():
@@ -174,3 +174,69 @@ def test_cross_dimension_invalid_dim_raises():
                       ["channel", "device"])
     with pytest.raises(ValueError):
         lens.analyze_cross_dimensions(SumMetric("revenue"), "channel", "nonexistent_col")
+
+
+# ── Shapley attribution tests ─────────────────────────────────────────────────
+
+def test_shapley_attributed_sum_equals_total_effect():
+    """mix_attributed + rate_attributed == total_effect for every segment."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"), ["channel"])
+    result = lens.analyze(RatioMetric("orders", "sessions", name="cvr"))
+    rows = result.to_dict()["dimensions"][0]["segment_contributions"]
+    for row in rows:
+        assert row["mix_attributed"] + row["rate_attributed"] == pytest.approx(row["total_effect"])
+
+
+def test_shapley_splits_cross_term_equally():
+    """mix_attributed = mix_effect + cross/2 and rate_attributed = rate_effect + cross/2."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"), ["channel"])
+    result = lens.analyze(RatioMetric("orders", "sessions", name="cvr"))
+    rows = result.to_dict()["dimensions"][0]["segment_contributions"]
+    for row in rows:
+        assert row["mix_attributed"] == pytest.approx(row["mix_effect"] + row["cross_term"] / 2)
+        assert row["rate_attributed"] == pytest.approx(row["rate_effect"] + row["cross_term"] / 2)
+
+
+# ── Bootstrap CI tests ────────────────────────────────────────────────────────
+
+def _multi_date_df():
+    """5-date dataset with 2 channels — enough dates for meaningful bootstrap resampling."""
+    rows = []
+    for day in range(1, 6):
+        rows.append({"date": f"2026-01-{day:02d}", "channel": "a", "orders": 10 + day, "sessions": 100})
+        rows.append({"date": f"2026-01-{day:02d}", "channel": "b", "orders": 5 + day, "sessions": 80})
+    for day in range(6, 11):
+        rows.append({"date": f"2026-01-{day:02d}", "channel": "a", "orders": 8 + day, "sessions": 100})
+        rows.append({"date": f"2026-01-{day:02d}", "channel": "b", "orders": 6 + day, "sessions": 80})
+    return pd.DataFrame(rows)
+
+
+def test_bootstrap_ci_keys_present():
+    """bootstrap_cis payload contains expected top-level keys."""
+    lens = MetricLens(_multi_date_df(), "date", ("2026-01-01", "2026-01-05"), ("2026-01-06", "2026-01-10"), ["channel"])
+    result = lens.analyze(RatioMetric("orders", "sessions", name="cvr"), bootstrap_n=50)
+    cis = result.to_dict()["bootstrap_cis"]
+    assert cis is not None
+    assert cis["n_bootstrap"] == 50
+    assert "dimensions" in cis
+    assert "channel" in cis["dimensions"]
+
+
+def test_bootstrap_ci_bounds_are_finite():
+    """lo and hi bounds for total_effect are finite floats for all segments."""
+    lens = MetricLens(_multi_date_df(), "date", ("2026-01-01", "2026-01-05"), ("2026-01-06", "2026-01-10"), ["channel"])
+    result = lens.analyze(RatioMetric("orders", "sessions", name="cvr"), bootstrap_n=50)
+    cis = result.to_dict()["bootstrap_cis"]["dimensions"]["channel"]
+    for seg_data in cis.values():
+        assert "total_effect" in seg_data
+        lo = seg_data["total_effect"]["lo"]
+        hi = seg_data["total_effect"]["hi"]
+        assert lo <= hi
+        assert lo == lo and hi == hi  # not NaN
+
+
+def test_bootstrap_ci_none_when_bootstrap_n_is_zero():
+    """bootstrap_cis is None when bootstrap_n=0 (default)."""
+    lens = MetricLens(base_df(), "date", ("2026-01-01", "2026-01-01"), ("2026-01-02", "2026-01-02"), ["channel"])
+    result = lens.analyze(RatioMetric("orders", "sessions", name="cvr"))
+    assert result.to_dict()["bootstrap_cis"] is None
