@@ -1,0 +1,6 @@
+dist/
+*.egg-info/
+.DS_Store
+__pycache__/
+*.pyc
+project_descriptions_part2.md
