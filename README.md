@@ -325,6 +325,12 @@ MIT © Sidharth Kriplani
 
 ---
 
+## Interview Defense
+
+[📄 MetricLens_Interview_Defense_v2.pdf](docs/prd/MetricLens_Interview_Defense_v2.pdf) — covers mix/rate/cross decomposition math, identity verification, edge cases (zero denominators, negative mix effects), and production scaling.
+
+---
+
 ## How This Connects
 
 MetricLens provides the **"why did it move?"** layer for any of the decision platforms in this portfolio:
