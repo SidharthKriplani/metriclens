@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "1.0",
   "metadata": {
     "metric_name": "revenue",
     "metric_type": "SumMetric",
@@ -390,11 +390,190 @@
     }
   ],
   "identity_checks": [],
+  "cross_dimension_interactions": {
+    "dim1": "channel",
+    "dim2": "device",
+    "cross_label": "channel / device",
+    "total_cells": 6,
+    "top_interactions": [
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / mobile",
+        "segment_status": "existing",
+        "baseline_value": 6428607.29,
+        "current_value": 5840751.61,
+        "segment_delta": -587855.6799999997,
+        "contribution_pct": 47.49911016284565,
+        "baseline_share": 0.29448190257235113,
+        "current_share": 0.2836333176776235,
+        "share_delta": -0.01084858489472762,
+        "channel": "paid_search",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / desktop",
+        "segment_status": "existing",
+        "baseline_value": 3065763.69,
+        "current_value": 2645176.91,
+        "segment_delta": -420586.7799999998,
+        "contribution_pct": 33.983677415954425,
+        "baseline_share": 0.1404366270238342,
+        "current_share": 0.12845269802999626,
+        "share_delta": -0.011983928993837933,
+        "channel": "organic",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / mobile",
+        "segment_status": "existing",
+        "baseline_value": 4598725.03,
+        "current_value": 4461763.79,
+        "segment_delta": -136961.24000000022,
+        "contribution_pct": 11.066554680223481,
+        "baseline_share": 0.21065858204592436,
+        "current_share": 0.21666815351039853,
+        "share_delta": 0.006009571464474173,
+        "channel": "organic",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / desktop",
+        "segment_status": "existing",
+        "baseline_value": 1404793.77,
+        "current_value": 1348383.84,
+        "segment_delta": -56409.929999999935,
+        "contribution_pct": 4.557957965717726,
+        "baseline_share": 0.06435084979524171,
+        "current_share": 0.06547900126197866,
+        "share_delta": 0.0011281514667369485,
+        "channel": "email",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / desktop",
+        "segment_status": "existing",
+        "baseline_value": 4245178.66,
+        "current_value": 4201802.24,
+        "segment_delta": -43376.419999999925,
+        "contribution_pct": 3.504842127322575,
+        "baseline_share": 0.1944633156392952,
+        "current_share": 0.2040441349219557,
+        "share_delta": 0.009580819282660497,
+        "channel": "paid_search",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / mobile",
+        "segment_status": "existing",
+        "baseline_value": 2087160.29,
+        "current_value": 2094736.25,
+        "segment_delta": 7575.959999999963,
+        "contribution_pct": -0.6121423520638782,
+        "baseline_share": 0.09560872292335344,
+        "current_share": 0.1017226945980474,
+        "share_delta": 0.006113971674693963,
+        "channel": "email",
+        "device": "mobile"
+      }
+    ],
+    "all_interactions": [
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / mobile",
+        "segment_status": "existing",
+        "baseline_value": 6428607.29,
+        "current_value": 5840751.61,
+        "segment_delta": -587855.6799999997,
+        "contribution_pct": 47.49911016284565,
+        "baseline_share": 0.29448190257235113,
+        "current_share": 0.2836333176776235,
+        "share_delta": -0.01084858489472762,
+        "channel": "paid_search",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / desktop",
+        "segment_status": "existing",
+        "baseline_value": 3065763.69,
+        "current_value": 2645176.91,
+        "segment_delta": -420586.7799999998,
+        "contribution_pct": 33.983677415954425,
+        "baseline_share": 0.1404366270238342,
+        "current_share": 0.12845269802999626,
+        "share_delta": -0.011983928993837933,
+        "channel": "organic",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / mobile",
+        "segment_status": "existing",
+        "baseline_value": 4598725.03,
+        "current_value": 4461763.79,
+        "segment_delta": -136961.24000000022,
+        "contribution_pct": 11.066554680223481,
+        "baseline_share": 0.21065858204592436,
+        "current_share": 0.21666815351039853,
+        "share_delta": 0.006009571464474173,
+        "channel": "organic",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / desktop",
+        "segment_status": "existing",
+        "baseline_value": 1404793.77,
+        "current_value": 1348383.84,
+        "segment_delta": -56409.929999999935,
+        "contribution_pct": 4.557957965717726,
+        "baseline_share": 0.06435084979524171,
+        "current_share": 0.06547900126197866,
+        "share_delta": 0.0011281514667369485,
+        "channel": "email",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / desktop",
+        "segment_status": "existing",
+        "baseline_value": 4245178.66,
+        "current_value": 4201802.24,
+        "segment_delta": -43376.419999999925,
+        "contribution_pct": 3.504842127322575,
+        "baseline_share": 0.1944633156392952,
+        "current_share": 0.2040441349219557,
+        "share_delta": 0.009580819282660497,
+        "channel": "paid_search",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / mobile",
+        "segment_status": "existing",
+        "baseline_value": 2087160.29,
+        "current_value": 2094736.25,
+        "segment_delta": 7575.959999999963,
+        "contribution_pct": -0.6121423520638782,
+        "baseline_share": 0.09560872292335344,
+        "current_share": 0.1017226945980474,
+        "share_delta": 0.006113971674693963,
+        "channel": "email",
+        "device": "mobile"
+      }
+    ]
+  },
   "investigation_areas": [
     "Investigate channel=paid_search first; it has the largest absolute segment_delta signal (-631232.0999999996).",
     "Investigate device=mobile first; it has the largest absolute segment_delta signal (-717240.959999999).",
     "Investigate city=Bengaluru first; it has the largest absolute segment_delta signal (-723637.330000001).",
     "Investigate category=skincare first; it has the largest absolute segment_delta signal (-710761.2600000016)."
   ],
+  "bootstrap_cis": null,
   "interpretation_note": "MetricLens reports deterministic metric movement decomposition. It identifies segment contributors, mix effects, rate effects, and cross terms. It does not claim causality, statistical significance, anomaly detection, or root cause proof. Use these outputs as investigation signals, not automatic decisions."
 }

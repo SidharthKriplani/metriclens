@@ -61,4 +61,4 @@ Not applicable for additive metrics.
 MetricLens reports deterministic metric movement decomposition. It identifies segment contributors, mix effects, rate effects, and cross terms. It does not claim causality, statistical significance, anomaly detection, or root cause proof. Use these outputs as investigation signals, not automatic decisions.
 
 ## 7. Schema
-schema_version: `0.1`
+schema_version: `1.0`

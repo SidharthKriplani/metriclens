@@ -30,6 +30,46 @@ It is deterministic, DataFrame-native, dependency-light, and honest about what i
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![CI](https://github.com/sidharthkriplani/metriclens/actions/workflows/ci.yml/badge.svg)](https://github.com/sidharthkriplani/metriclens/actions)
 
+[![Decomposition](https://img.shields.io/badge/Decomposition-Mix%20%2F%20Rate%20%2F%20Cross-4fc3f7?style=flat-square)](src/)
+[![Metric Types](https://img.shields.io/badge/Metrics-Ratio%20%7C%20Sum%20%7C%20Count%20%7C%20Average-42a5f5?style=flat-square)](src/)
+[![Tests](https://img.shields.io/badge/Tests-19%2F19_passing-66bb6a?style=flat-square)](tests/)
+[![Output](https://img.shields.io/badge/Output-JSON%20%7C%20Markdown%20%7C%20HTML-ab47bc?style=flat-square)](src/)
+[![pip](https://img.shields.io/badge/pip_install-metriclens-3776AB?style=flat-square&logo=python&logoColor=white)](https://pypi.org/project/metriclens/)
+
+## Architecture
+
+![MetricLens Architecture](docs/assets/architecture.svg)
+
+---
+
+## Sample Output
+
+![Sample Output](docs/assets/decomposition_sample.svg)
+
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    DF["📊 pandas DataFrame\nDaily segment-level grain\ndate · dimensions · numerator · denominator"] --> MT
+
+    MT["Metric Type\nRatioMetric · SumMetric · CountMetric · AverageMetric"]
+    MT --> VAL["Input Validation\nNull fill · zero-fill for missing segments\nNew + disappeared segment detection"]
+    VAL --> DEC
+
+    subgraph DEC["Decomposition Engine"]
+        ME["mix_effect — segment grew or shrank in volume"]
+        RE["rate_effect — segment's own rate changed"]
+        CT["cross_term — interaction, always reported\nomitting it breaks the exact identity"]
+    end
+
+    DEC --> SUM["Σ mix + rate + cross = total_delta\nExact · no residual"]
+    SUM --> RANK["Segment Ranking\nSorted by absolute total_effect\nAuto-generated investigation priority"]
+    RANK --> OUT["result.to_json() · to_markdown() · to_html()"]
+    OUT --> NOTE["⚠️ Interpretation Note — mandatory, cannot be suppressed\nDecomposition only · no causality · no significance\nInvestigation signals, not decisions"]
+```
+
 ---
 
 ## Why MetricLens exists
@@ -301,3 +341,35 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Issues and PRs welcome.
 ## License
 
 MIT © Sidharth Kriplani
+
+---
+
+## Interview Defense
+
+[📄 MetricLens_Interview_Defense_v2.pdf](docs/defense/MetricLens_Interview_Defense_v2.pdf) — covers mix/rate/cross decomposition math, identity verification, edge cases (zero denominators, negative mix effects), and production scaling.
+
+---
+
+## How This Connects
+
+MetricLens provides the **"why did it move?"** layer for any of the decision platforms in this portfolio:
+
+- **PulseRank:** After an A/B test changes the ranking algorithm, MetricLens decomposes GMV movement into seller mix shift (more high-GMV sellers exposed) vs. rate shift (same sellers converting at higher rates) — separating the diversity reranking effect from pure algorithm quality.
+- **RiskFrame:** After a threshold policy change (v1.0 → v1.1), MetricLens quantifies how much of the approval rate change came from mix shift in the applicant pool vs. the threshold tightening itself.
+- **MetaSignal:** Provides the post-experiment decomposition layer. MetaSignal answers "did the experiment win?" MetricLens answers "where in the segment distribution did the win come from?"
+
+The library is intentionally standalone — no dependency on the other platforms. It can be dropped into any analytics pipeline that produces segment-level before/after DataFrames.
+
+---
+
+## Part of Applied LLM Systems Portfolio
+
+This project is part of a portfolio targeting Applied LLM Systems Engineer roles.
+
+- [**NexusSupply**](https://github.com/SidharthKriplani/nexussupply) — Supplier Risk Intelligence Platform (LangGraph + FinBERT + XGBoost + Instructor + NetworkX)
+- [**LendFlow**](https://github.com/SidharthKriplani/lendflow) — AI-powered loan underwriting pipeline (LangGraph + RAG + FOIR rules engine)
+- [**AgentReliabilityLab**](https://github.com/SidharthKriplani/agentreliabilitylab) — Cyber threat triage agent (LangGraph + hybrid RAG + HITL + RAGAS eval)
+- [**RiskFrame Platform**](https://github.com/SidharthKriplani/riskframe_platform) — ML model lifecycle (XGBoost + LightGBM champion/challenger, Optuna HPO, drift monitoring)
+- [**DevPulse Platform**](https://github.com/SidharthKriplani/devpulse_platform) — Version-safe RAG migration intelligence (LLM-Last principle, conflict detection)
+- [**PulseRank Platform**](https://github.com/SidharthKriplani/pulserank_platform) — Marketplace ranking with IPS debiasing (position bias correction, delayed attribution)
+- [**MetaSignal Platform**](https://github.com/SidharthKriplani/metasignal_platform) — Experimentation intelligence (CUPED + guardrail-first + A/A calibration)

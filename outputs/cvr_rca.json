@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "1.0",
   "metadata": {
     "metric_name": "cvr",
     "metric_type": "RatioMetric",
@@ -113,6 +113,8 @@
           "rate_effect": -0.007242565582650857,
           "cross_term": -0.0007714021710433339,
           "total_effect": -0.004265487581197321,
+          "mix_attributed": 0.003362779086975202,
+          "rate_attributed": -0.007628266668172523,
           "contribution_pct": 52.22424753323496
         },
         {
@@ -133,6 +135,8 @@
           "rate_effect": -0.00032479082619979633,
           "cross_term": 3.583271457929137e-05,
           "total_effect": -0.003047247521313458,
+          "mix_attributed": -0.0027403730524033078,
+          "rate_attributed": -0.0003068744689101507,
           "contribution_pct": 37.308796665969915
         },
         {
@@ -153,6 +157,8 @@
           "rate_effect": -3.8567229934512625e-05,
           "cross_term": 2.7482432825343015e-06,
           "total_effect": -0.0008549030783606824,
+          "mix_attributed": -0.000817709970067437,
+          "rate_attributed": -3.719310829324547e-05,
           "contribution_pct": 10.46695580079512
         }
       ],
@@ -175,6 +181,8 @@
           "rate_effect": -0.007242565582650857,
           "cross_term": -0.0007714021710433339,
           "total_effect": -0.004265487581197321,
+          "mix_attributed": 0.003362779086975202,
+          "rate_attributed": -0.007628266668172523,
           "contribution_pct": 52.22424753323496
         },
         {
@@ -195,6 +203,8 @@
           "rate_effect": -0.00032479082619979633,
           "cross_term": 3.583271457929137e-05,
           "total_effect": -0.003047247521313458,
+          "mix_attributed": -0.0027403730524033078,
+          "rate_attributed": -0.0003068744689101507,
           "contribution_pct": 37.308796665969915
         },
         {
@@ -215,6 +225,8 @@
           "rate_effect": -3.8567229934512625e-05,
           "cross_term": 2.7482432825343015e-06,
           "total_effect": -0.0008549030783606824,
+          "mix_attributed": -0.000817709970067437,
+          "rate_attributed": -3.719310829324547e-05,
           "contribution_pct": 10.46695580079512
         }
       ],
@@ -241,6 +253,8 @@
           "rate_effect": -0.007673849861092223,
           "cross_term": -0.0005338472654819173,
           "total_effect": -0.005193232823200733,
+          "mix_attributed": 0.0027475406706324486,
+          "rate_attributed": -0.007940773493833181,
           "contribution_pct": 63.58304210099854
         },
         {
@@ -261,6 +275,8 @@
           "rate_effect": 0.0001652790354191628,
           "cross_term": -1.8192999268550092e-05,
           "total_effect": -0.0029744053576707223,
+          "mix_attributed": -0.00313058789345561,
+          "rate_attributed": 0.00015618253578488775,
           "contribution_pct": 36.41695789900138
         }
       ],
@@ -283,6 +299,8 @@
           "rate_effect": -0.007673849861092223,
           "cross_term": -0.0005338472654819173,
           "total_effect": -0.005193232823200733,
+          "mix_attributed": 0.0027475406706324486,
+          "rate_attributed": -0.007940773493833181,
           "contribution_pct": 63.58304210099854
         },
         {
@@ -303,6 +321,8 @@
           "rate_effect": 0.0001652790354191628,
           "cross_term": -1.8192999268550092e-05,
           "total_effect": -0.0029744053576707223,
+          "mix_attributed": -0.00313058789345561,
+          "rate_attributed": 0.00015618253578488775,
           "contribution_pct": 36.41695789900138
         }
       ],
@@ -329,6 +349,8 @@
           "rate_effect": -0.003608474454397237,
           "cross_term": 4.044928353912083e-05,
           "total_effect": -0.0038890798866961984,
+          "mix_attributed": -0.00030083007406852207,
+          "rate_attributed": -0.0035882498126276765,
           "contribution_pct": 47.61572195747346
         },
         {
@@ -349,6 +371,8 @@
           "rate_effect": -0.0026120114082560726,
           "cross_term": 1.1746088832206054e-05,
           "total_effect": -0.0026921445949650994,
+          "mix_attributed": -8.600623112512975e-05,
+          "rate_attributed": -0.0026061383638399695,
           "contribution_pct": 32.96111477207791
         },
         {
@@ -369,6 +393,8 @@
           "rate_effect": -0.0019432000347280253,
           "cross_term": -3.3535435255008965e-05,
           "total_effect": -0.001586413699210156,
+          "mix_attributed": 0.00037355405314537396,
+          "rate_attributed": -0.00195996775235553,
           "contribution_pct": 19.423163270448526
         }
       ],
@@ -391,6 +417,8 @@
           "rate_effect": -0.003608474454397237,
           "cross_term": 4.044928353912083e-05,
           "total_effect": -0.0038890798866961984,
+          "mix_attributed": -0.00030083007406852207,
+          "rate_attributed": -0.0035882498126276765,
           "contribution_pct": 47.61572195747346
         },
         {
@@ -411,6 +439,8 @@
           "rate_effect": -0.0026120114082560726,
           "cross_term": 1.1746088832206054e-05,
           "total_effect": -0.0026921445949650994,
+          "mix_attributed": -8.600623112512975e-05,
+          "rate_attributed": -0.0026061383638399695,
           "contribution_pct": 32.96111477207791
         },
         {
@@ -431,6 +461,8 @@
           "rate_effect": -0.0019432000347280253,
           "cross_term": -3.3535435255008965e-05,
           "total_effect": -0.001586413699210156,
+          "mix_attributed": 0.00037355405314537396,
+          "rate_attributed": -0.00195996775235553,
           "contribution_pct": 19.423163270448526
         }
       ],
@@ -457,6 +489,8 @@
           "rate_effect": -0.003474843850905321,
           "cross_term": -9.402496111582417e-06,
           "total_effect": -0.003405854453209873,
+          "mix_attributed": 7.369064575123895e-05,
+          "rate_attributed": -0.0034795450989611124,
           "contribution_pct": 41.699379646693394
         },
         {
@@ -477,6 +511,8 @@
           "rate_effect": -0.0026998470310075277,
           "cross_term": 1.286201881023874e-05,
           "total_effect": -0.002805144507060699,
+          "mix_attributed": -0.0001117284854582906,
+          "rate_attributed": -0.0026934160216024084,
           "contribution_pct": 34.3446225817192
         },
         {
@@ -497,6 +533,8 @@
           "rate_effect": -0.001983617554573839,
           "cross_term": -3.358842093849074e-06,
           "total_effect": -0.001956639220600882,
+          "mix_attributed": 2.865775501988162e-05,
+          "rate_attributed": -0.0019852969756207635,
           "contribution_pct": 23.955997771587317
         }
       ],
@@ -519,6 +557,8 @@
           "rate_effect": -0.003474843850905321,
           "cross_term": -9.402496111582417e-06,
           "total_effect": -0.003405854453209873,
+          "mix_attributed": 7.369064575123895e-05,
+          "rate_attributed": -0.0034795450989611124,
           "contribution_pct": 41.699379646693394
         },
         {
@@ -539,6 +579,8 @@
           "rate_effect": -0.0026998470310075277,
           "cross_term": 1.286201881023874e-05,
           "total_effect": -0.002805144507060699,
+          "mix_attributed": -0.0001117284854582906,
+          "rate_attributed": -0.0026934160216024084,
           "contribution_pct": 34.3446225817192
         },
         {
@@ -559,6 +601,8 @@
           "rate_effect": -0.001983617554573839,
           "cross_term": -3.358842093849074e-06,
           "total_effect": -0.001956639220600882,
+          "mix_attributed": 2.865775501988162e-05,
+          "rate_attributed": -0.0019852969756207635,
           "contribution_pct": 23.955997771587317
         }
       ],
@@ -583,11 +627,310 @@
       "identity_residual": -6.938893903907228e-18
     }
   ],
+  "cross_dimension_interactions": {
+    "dim1": "channel",
+    "dim2": "device",
+    "cross_label": "channel / device",
+    "total_cells": 6,
+    "top_interactions": [
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / mobile",
+        "segment_status": "existing",
+        "baseline_numerator": 5040,
+        "baseline_denominator": 69816,
+        "baseline_rate": 0.07218975592987281,
+        "baseline_weight": 0.2951464191048713,
+        "current_numerator": 4562,
+        "current_denominator": 90903,
+        "current_rate": 0.05018536241928209,
+        "current_weight": 0.3587445538927827,
+        "weight_delta": 0.06359813478791138,
+        "rate_delta": -0.02200439351059072,
+        "mix_effect": 0.004591133827934476,
+        "rate_effect": -0.006494517949225319,
+        "cross_term": -0.001399438384412791,
+        "total_effect": -0.003302822505703634,
+        "mix_attributed": 0.0038914146357280806,
+        "rate_attributed": -0.0071942371414317145,
+        "contribution_pct": 40.437914028057904,
+        "channel": "paid_search",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / desktop",
+        "segment_status": "existing",
+        "baseline_numerator": 2336,
+        "baseline_denominator": 33746,
+        "baseline_rate": 0.06922301902447697,
+        "baseline_weight": 0.14266086655083346,
+        "current_numerator": 2091,
+        "current_denominator": 29478,
+        "current_rate": 0.07093425605536333,
+        "current_weight": 0.11633358590642168,
+        "weight_delta": -0.026327280644411782,
+        "rate_delta": 0.0017112370308863534,
+        "mix_effect": -0.0018224538489108612,
+        "rate_effect": 0.00024412655770012252,
+        "cross_term": -4.5052217561254976e-05,
+        "total_effect": -0.0016233795087719936,
+        "mix_attributed": -0.0018449799576914887,
+        "rate_attributed": 0.00022160044891949502,
+        "contribution_pct": 19.875751996139282,
+        "channel": "organic",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / mobile",
+        "segment_status": "existing",
+        "baseline_numerator": 3578,
+        "baseline_denominator": 53629,
+        "baseline_rate": 0.06671763411587014,
+        "baseline_weight": 0.22671604374606316,
+        "current_numerator": 3472,
+        "current_denominator": 53793,
+        "current_rate": 0.0645437138661164,
+        "current_weight": 0.2122916272021216,
+        "weight_delta": -0.014424416543941554,
+        "rate_delta": -0.0021739202497537413,
+        "mix_effect": -0.0009623629453135967,
+        "rate_effect": -0.0004928625984436218,
+        "cross_term": 3.135753121575742e-05,
+        "total_effect": -0.0014238680125414612,
+        "mix_attributed": -0.000946684179705718,
+        "rate_attributed": -0.000477183832835743,
+        "contribution_pct": 17.433044669830597,
+        "channel": "organic",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / desktop",
+        "segment_status": "existing",
+        "baseline_numerator": 3285,
+        "baseline_denominator": 44206,
+        "baseline_rate": 0.07431117947789893,
+        "baseline_weight": 0.18688040854460214,
+        "current_numerator": 3275,
+        "current_denominator": 44248,
+        "current_rate": 0.0740146447297053,
+        "current_weight": 0.17462271894929596,
+        "weight_delta": -0.012257689595306182,
+        "rate_delta": -0.0002965347481936331,
+        "mix_effect": -0.000910883371501172,
+        "rate_effect": -5.541653489009688e-05,
+        "cross_term": 3.634830897579835e-06,
+        "total_effect": -0.000962665075493689,
+        "mix_attributed": -0.000909065956052382,
+        "rate_attributed": -5.359911944130696e-05,
+        "contribution_pct": 11.786333505177083,
+        "channel": "paid_search",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / mobile",
+        "segment_status": "existing",
+        "baseline_numerator": 1632,
+        "baseline_denominator": 21498,
+        "baseline_rate": 0.07591403851521071,
+        "baseline_weight": 0.0908825730193154,
+        "current_numerator": 1630,
+        "current_denominator": 21370,
+        "current_rate": 0.07627515208235845,
+        "current_weight": 0.08433573277767253,
+        "weight_delta": -0.006546840241642871,
+        "rate_delta": 0.0003611135671477417,
+        "mix_effect": -0.0004969970822570083,
+        "rate_effect": 3.281893013457009e-05,
+        "cross_term": -2.36415283320604e-06,
+        "total_effect": -0.0004665423049556442,
+        "mix_attributed": -0.0004981791586736113,
+        "rate_attributed": 3.163685371796707e-05,
+        "contribution_pct": 5.712083403110121,
+        "channel": "email",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / desktop",
+        "segment_status": "existing",
+        "baseline_numerator": 1087,
+        "baseline_denominator": 13652,
+        "baseline_rate": 0.07962203340169939,
+        "baseline_weight": 0.057713689034314536,
+        "current_numerator": 1066,
+        "current_denominator": 13600,
+        "current_rate": 0.07838235294117647,
+        "current_weight": 0.0536717812717055,
+        "weight_delta": -0.004041907762609036,
+        "rate_delta": -0.0012396804605229184,
+        "mix_effect": -0.0003218249148810447,
+        "rate_effect": -7.154653260053554e-05,
+        "cross_term": 5.010674076542328e-06,
+        "total_effect": -0.0003883607734050379,
+        "mix_attributed": -0.0003193195778427735,
+        "rate_attributed": -6.904119556226437e-05,
+        "contribution_pct": 4.754872397684994,
+        "channel": "email",
+        "device": "desktop"
+      }
+    ],
+    "all_interactions": [
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / mobile",
+        "segment_status": "existing",
+        "baseline_numerator": 5040,
+        "baseline_denominator": 69816,
+        "baseline_rate": 0.07218975592987281,
+        "baseline_weight": 0.2951464191048713,
+        "current_numerator": 4562,
+        "current_denominator": 90903,
+        "current_rate": 0.05018536241928209,
+        "current_weight": 0.3587445538927827,
+        "weight_delta": 0.06359813478791138,
+        "rate_delta": -0.02200439351059072,
+        "mix_effect": 0.004591133827934476,
+        "rate_effect": -0.006494517949225319,
+        "cross_term": -0.001399438384412791,
+        "total_effect": -0.003302822505703634,
+        "mix_attributed": 0.0038914146357280806,
+        "rate_attributed": -0.0071942371414317145,
+        "contribution_pct": 40.437914028057904,
+        "channel": "paid_search",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / desktop",
+        "segment_status": "existing",
+        "baseline_numerator": 2336,
+        "baseline_denominator": 33746,
+        "baseline_rate": 0.06922301902447697,
+        "baseline_weight": 0.14266086655083346,
+        "current_numerator": 2091,
+        "current_denominator": 29478,
+        "current_rate": 0.07093425605536333,
+        "current_weight": 0.11633358590642168,
+        "weight_delta": -0.026327280644411782,
+        "rate_delta": 0.0017112370308863534,
+        "mix_effect": -0.0018224538489108612,
+        "rate_effect": 0.00024412655770012252,
+        "cross_term": -4.5052217561254976e-05,
+        "total_effect": -0.0016233795087719936,
+        "mix_attributed": -0.0018449799576914887,
+        "rate_attributed": 0.00022160044891949502,
+        "contribution_pct": 19.875751996139282,
+        "channel": "organic",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "organic / mobile",
+        "segment_status": "existing",
+        "baseline_numerator": 3578,
+        "baseline_denominator": 53629,
+        "baseline_rate": 0.06671763411587014,
+        "baseline_weight": 0.22671604374606316,
+        "current_numerator": 3472,
+        "current_denominator": 53793,
+        "current_rate": 0.0645437138661164,
+        "current_weight": 0.2122916272021216,
+        "weight_delta": -0.014424416543941554,
+        "rate_delta": -0.0021739202497537413,
+        "mix_effect": -0.0009623629453135967,
+        "rate_effect": -0.0004928625984436218,
+        "cross_term": 3.135753121575742e-05,
+        "total_effect": -0.0014238680125414612,
+        "mix_attributed": -0.000946684179705718,
+        "rate_attributed": -0.000477183832835743,
+        "contribution_pct": 17.433044669830597,
+        "channel": "organic",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "paid_search / desktop",
+        "segment_status": "existing",
+        "baseline_numerator": 3285,
+        "baseline_denominator": 44206,
+        "baseline_rate": 0.07431117947789893,
+        "baseline_weight": 0.18688040854460214,
+        "current_numerator": 3275,
+        "current_denominator": 44248,
+        "current_rate": 0.0740146447297053,
+        "current_weight": 0.17462271894929596,
+        "weight_delta": -0.012257689595306182,
+        "rate_delta": -0.0002965347481936331,
+        "mix_effect": -0.000910883371501172,
+        "rate_effect": -5.541653489009688e-05,
+        "cross_term": 3.634830897579835e-06,
+        "total_effect": -0.000962665075493689,
+        "mix_attributed": -0.000909065956052382,
+        "rate_attributed": -5.359911944130696e-05,
+        "contribution_pct": 11.786333505177083,
+        "channel": "paid_search",
+        "device": "desktop"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / mobile",
+        "segment_status": "existing",
+        "baseline_numerator": 1632,
+        "baseline_denominator": 21498,
+        "baseline_rate": 0.07591403851521071,
+        "baseline_weight": 0.0908825730193154,
+        "current_numerator": 1630,
+        "current_denominator": 21370,
+        "current_rate": 0.07627515208235845,
+        "current_weight": 0.08433573277767253,
+        "weight_delta": -0.006546840241642871,
+        "rate_delta": 0.0003611135671477417,
+        "mix_effect": -0.0004969970822570083,
+        "rate_effect": 3.281893013457009e-05,
+        "cross_term": -2.36415283320604e-06,
+        "total_effect": -0.0004665423049556442,
+        "mix_attributed": -0.0004981791586736113,
+        "rate_attributed": 3.163685371796707e-05,
+        "contribution_pct": 5.712083403110121,
+        "channel": "email",
+        "device": "mobile"
+      },
+      {
+        "dimension": "channel / device",
+        "segment": "email / desktop",
+        "segment_status": "existing",
+        "baseline_numerator": 1087,
+        "baseline_denominator": 13652,
+        "baseline_rate": 0.07962203340169939,
+        "baseline_weight": 0.057713689034314536,
+        "current_numerator": 1066,
+        "current_denominator": 13600,
+        "current_rate": 0.07838235294117647,
+        "current_weight": 0.0536717812717055,
+        "weight_delta": -0.004041907762609036,
+        "rate_delta": -0.0012396804605229184,
+        "mix_effect": -0.0003218249148810447,
+        "rate_effect": -7.154653260053554e-05,
+        "cross_term": 5.010674076542328e-06,
+        "total_effect": -0.0003883607734050379,
+        "mix_attributed": -0.0003193195778427735,
+        "rate_attributed": -6.904119556226437e-05,
+        "contribution_pct": 4.754872397684994,
+        "channel": "email",
+        "device": "desktop"
+      }
+    ]
+  },
   "investigation_areas": [
     "Investigate channel=paid_search first; it has the largest absolute total_effect signal (-0.004265487581197321).",
     "Investigate device=mobile first; it has the largest absolute total_effect signal (-0.005193232823200733).",
     "Investigate city=Bengaluru first; it has the largest absolute total_effect signal (-0.0038890798866961984).",
     "Investigate category=skincare first; it has the largest absolute total_effect signal (-0.003405854453209873)."
   ],
+  "bootstrap_cis": null,
   "interpretation_note": "MetricLens reports deterministic metric movement decomposition. It identifies segment contributors, mix effects, rate effects, and cross terms. It does not claim causality, statistical significance, anomaly detection, or root cause proof. Use these outputs as investigation signals, not automatic decisions."
 }
